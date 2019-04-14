@@ -3,84 +3,64 @@
 <head>
 	<title>衣橱欢迎界面</title>
 	<meta charset="utf-8">
-	<meta name="auther" content="屈小花">
+  <meta name="auther" content="屈小花">
+  <link rel="stylesheet" href="./static/js/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="./css/layout.css">
+
+  <link rel="stylesheet" href="./css/home.css">
+
+  <!-- 基本所需库JS -->
+  <script src="./static/js/jquery/jquery-3.3.1.js"></script>
+  <script src="./static/js/bootstrap/js/bootstrap.min.js"></script>
 </head>
-<style type="text/css">
-    body{
-		font-size: 12px;
-		font-family: Arial,Verdana; 
-		background-color: #f2f2f2;
-		height: 100vh;
-		width: 100%;
-   }
-   *{
-  overflow-y: hidden;
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-    }
-	header{
-		height: 20vh;
-		margin: 20px;
-	}
-	section{
-          height: 80vh;
-          width: 100%;
-          margin: 0 auto;  
-    } 
-    #header_left{
-    	border-right: 1px solid #ccc;
-    	height: 70px;
-      border-radius: 45px;
-    }
-    #header_right{
-      text-align: center;
-    }
-    .main{
-      height: 100%;
-      position: relative;
-    }
-    .main .title{
-      height: 30%;
-    }
-    .main .title .title-img {
-      width: 330px;
-      height: 80%;
-      margin: 0 auto;
-    }
-    .title-img > img {
-      width: 100%;
-      height: 100%;
-    }
-    .main .citi{
-	     height: 70%;
-       opacity: 0.5;
-    }
-    .main .citi > img {
-      width: 100%;
-      height: 100%;
-    }
-    
-</style>
 <body>
-  <header>
-    <img src="image/hs.png" id="header_left">
-    <img src="image/welcome.png" id="header_right">
-  </header>
-  <section>
-    <div class="main">
-      <div class="title clear-float">
-        <div class="title-img">
-          <img src="image/title.png" >
+  <div id="app">
+    <div class="wrapper">
+      <header id="cloth-header" class="clear-float">
+        <div class="left cloth-header-logo">
+          <a href="./home.html"><span class="logo"></span></a>
+          <span>衣橱管理</span>
         </div>
-        <p class="text-center" style="font-size: 16px"><a href="./chothespress.html" target="_self">进入我的衣橱</a></p>
-      </div>
-      <div class="citi">
-        <img src="image/citi_bg.png" >
-      </div>
-    </div>
-  </section>
+        <div class="right cloth-header-user">
+          <span class="header-user">admin</span>&nbsp;|&nbsp;
+          <span class="logout">登出</span>
+        </div>
+      </header>
+      <div class="main">
+        <div id="content">
+          <!-- 页面内容 -->
+          <div class="content-body home">
+            <div class="home-start-bg">
+              <div class="home-title text-center">
+                <div class="title-img">
+                  <img src="image/title.png" >
+                </div>
+                <p class="home-title-link text-center">
+                  <a href="./chothespress.html" target="_self" class="btn btn-info" role="button">进入我的衣橱</a>
+                </p>
+              </div>
+            </div>
+            <div class="home-share">
+              <ul class="home-share-list clear-float" id="home-share"></ul>
+            </div>
+          </div>
+          <footer id="footer">衣橱应用</footer>
+		    </div>
+    	</div>
+    </div>  
+  </div>
 </body>
+<!-- 项目基本JS -->
+<script src="./js/common.js"></script>
+<!-- 当前页所需JS -->
+<script src="./js/home.js"></script>
+<script>
+  $().ready(function () {
+    clothCommon.init();
+
+    home.init();
+  });
+</script>
 </html>

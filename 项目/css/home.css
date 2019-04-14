@@ -1,0 +1,69 @@
+#content .content-body.home {
+  padding: 0;
+}
+.home-start-bg {
+  position: relative;
+  height: 500px;
+  background: url('../image/citi_bg.png') no-repeat center;
+  background-size: 100% 100%;
+}
+
+.home-title {
+  margin: 8px 0;
+}
+
+.home-title-link {
+  font-size: 16px;
+  margin-top:16px;
+}
+
+.home-share {
+  padding: 16px;
+}
+
+.home-share-list {
+  display: flex;
+  justify-content: center;
+}
+
+.home-share-list li {
+  position: relative;
+  float: left;
+  width: 250px;
+  height: 250px;
+  margin: 16px;
+}
+
+.home-share-list li:hover .share-item-info {
+  opacity: .8;
+}
+
+.home-share-list li > img {
+  width: 100%;
+  height: 100%;
+}
+
+.home-share-list li .share-item-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  width: 100%;
+  opacity: 0;
+  font-size: 18px;
+  text-align: center;
+  padding: 16px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, .6);
+  transition: opacity .6s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.share-item-info dt {
+  color: bisque;
+  padding-bottom: 16px;
+}
+
+.share-item-info dd > span {
+  padding: 0 16px;
+  cursor: pointer;
+}
