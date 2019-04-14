@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>衣橱欢迎界面</title>
+	<meta charset="utf-8">
+	<meta name="auther" content="屈小花">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/common.css">
+</head>
+<style type="text/css">
+    body{
+		font-size: 12px;
+		font-family: Arial,Verdana; 
+		background-color: #f2f2f2;
+		height: 100vh;
+		width: 100%;
+   }
+   *{
+  overflow-y: hidden;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+    }
+	header{
+		height: 20vh;
+		margin: 20px;
+	}
+	section{
+          height: 80vh;
+          width: 100%;
+          margin: 0 auto;  
+    } 
+    #header_left{
+    	border-right: 1px solid #ccc;
+    	height: 70px;
+      border-radius: 45px;
+    }
+    #header_right{
+      text-align: center;
+    }
+    .main{
+      height: 100%;
+      position: relative;
+    }
+    .main .title{
+      height: 30%;
+    }
+    .main .title .title-img {
+      width: 330px;
+      height: 80%;
+      margin: 0 auto;
+    }
+    .title-img > img {
+      width: 100%;
+      height: 100%;
+    }
+    .main .citi{
+	     height: 70%;
+       opacity: 0.5;
+    }
+    .main .citi > img {
+      width: 100%;
+      height: 100%;
+    }
+    
+</style>
+<body>
+  <header>
+    <img src="image/hs.png" id="header_left">
+    <img src="image/welcome.png" id="header_right">
+  </header>
+  <section>
+    <div class="main">
+      <div class="title clear-float">
+        <div class="title-img">
+          <img src="image/title.png" >
+        </div>
+        <p class="text-center" style="font-size: 16px"><a href="./chothespress.html" target="_self">进入我的衣橱</a></p>
+      </div>
+      <div class="citi">
+        <img src="image/citi_bg.png" >
+      </div>
+    </div>
+  </section>
+</body>
+</html>
