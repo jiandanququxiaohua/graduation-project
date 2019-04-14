@@ -1,20 +1,37 @@
 #content .content-body.home {
   padding: 0;
 }
+
 .home-start-bg {
   position: relative;
-  height: 500px;
-  background: url('../image/citi_bg.png') no-repeat center;
+  height: 660px;
+  background-color: #f2f2f2;
   background-size: 100% 100%;
 }
 
 .home-title {
-  margin: 8px 0;
+  margin-bottom: 8px;
+}
+
+.home-title .title-img {
+  padding-top: 32px;
 }
 
 .home-title-link {
   font-size: 16px;
   margin-top:16px;
+}
+
+.home-start-bg .citi {
+  position: absolute;
+  bottom: 0;
+  z-index: 9;
+  width: 100%;
+  opacity: 0.75;
+}
+
+.home-start-bg .citi img {
+  width: 100%;
 }
 
 .home-share {
