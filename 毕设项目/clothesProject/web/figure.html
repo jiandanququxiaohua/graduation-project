@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>衣橱管理</title>
+  <!-- css -->
+  <link rel="stylesheet" href="./static/js/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <!-- 当前页面样式 -->
+  <link rel="stylesheet" href="./css/figure.css">
+  <!-- 基本所需库JS -->
+  <script src="./static/js/jquery/jquery-3.3.1.js"></script>
+  <script src="./static/js/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<!-- 模板html: 包含一些基本样式及项目所需js -->
+<body>
+  <div id="app">
+    <div class="wrapper">
+      <header id="cloth-header" class="clear-float">
+        <div class="left cloth-header-logo">
+            <a href="./home.html"><span class="logo"></span></a>
+          <span>衣橱管理</span>
+        </div>
+        <div class="right cloth-header-user">
+          <span class="header-user">admin</span>&nbsp;|&nbsp;
+          <span class="logout">登出</span>
+        </div>
+      </header>
+      <div class="main">
+        <div id="navs">
+          <!-- 导航 -->
+        </div>
+        <div id="content">
+          <!-- 页面内容 -->
+          <div class="content-body">
+            <div class="row figure">
+              <div class="col-md-7 col-xs-12">
+                <form>
+                  <div class="form-group">
+                    <label for="weight">体重</label>
+                    <input type="text" class="form-control" id="weight" placeholder="请填写体重">
+                  </div>
+                  <div class="form-group">
+                    <label for="stature">身高</label>
+                    <input type="text" class="form-control" id="stature" placeholder="请填写身高">
+                  </div>
+                  <div class="form-group">
+                    <label for="chestSize">胸围</label>
+                    <input type="text" class="form-control" id="chestSize" placeholder="请填写胸围">
+                  </div>
+                  <div class="form-group">
+                    <label for="waistSize">腰围</label>
+                    <input type="text" class="form-control" id="waistSize" placeholder="请填写腰围">
+                  </div>
+                  <div class="form-group">
+                    <label for="hiplineSize">臀围</label>
+                    <input type="text" class="form-control" id="hiplineSize" placeholder="请填写臀围">
+                  </div>
+                  <div class="form-group text-right">
+                    <button type="submit" class="btn btn-info" style="margin-right: 16px;">保存</button>
+                    <button class="btn btn-default">取消</button>
+                  </div>
+                </form>
+              </div>
+              <div class="col-md-4 col-md-offset-1 col-xs-12 text-center">
+                <dl class="figure-img">
+                  <dt>
+                    <img src="./image/body-pic.png" alt="身体数据">
+                  </dt>
+                  <dd>
+                    <img src="./image/body-circle.png" alt="身体数据">
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+          <footer id="footer">衣橱应用</footer>
+		    </div>
+    	</div>
+    </div>  
+  </div>
+</body>
+<!-- 项目基本JS -->
+<script src="./js/common.js"></script>
+<!-- 当前页所需JS -->
+<script>
+  $().ready(function () {
+    clothCommon.init();
+    clothCommon.navs('#navs', 'figure');
+  });
+</script>
+</html>

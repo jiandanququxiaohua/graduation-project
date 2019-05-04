@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>衣橱管理</title>
+  <!-- css -->
+  <link rel="stylesheet" href="./static/js/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <!-- 当前页面样式 -->
+
+  <!-- 基本所需库JS -->
+  <script src="./static/js/jquery/jquery-3.3.1.js"></script>
+  <script src="./static/js/bootstrap/js/bootstrap.min.js"></script>
+  <script src="./static/js/echarts/echarts-customer.min.js"></script>
+</head>
+<!-- 模板html: 包含一些基本样式及项目所需js -->
+<body>
+  <div id="app">
+    <div class="wrapper">
+      <header id="cloth-header" class="clear-float">
+        <div class="left cloth-header-logo">
+            <a href="./home.html"><span class="logo"></span></a>
+          <span>衣橱管理</span>
+        </div>
+        <div class="right cloth-header-user">
+          <span class="header-user">admin</span>&nbsp;|&nbsp;
+          <span class="logout">登出</span>
+        </div>
+      </header>
+      <div class="main">
+        <div id="navs">
+          <!-- 导航 -->
+        </div>
+        <div id="content">
+          <!-- 页面内容 -->
+          <div class="content-body">
+            <div class="page-actions">
+              <form class="form-inline">
+                <div class="form-group">
+                  <label for="search-type">衣服分类</label>
+                  <select class="form-control" id="search-type" style="width: 160px">
+                    <option>上衣</option>
+                    <option>裤子</option>
+                    <option>鞋子</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="search-isLink">是否喜欢</label>
+                  <select class="form-control" id="search-isLink"  style="width: 160px">
+                    <option>是</option>
+                    <option>否</option>
+                  </select>
+                </div>
+                <div class="form-group btns-margin">
+                  <button type="submit" class="btn btn-info">查询</button>
+                  <button class="btn btn-default">重置</button>
+                </div>
+              </form>
+            </div>
+            <div class="page-body">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>分类</th>
+                    <th>编号</th>
+                    <th>品牌</th>
+                    <th>名称</th>
+                    <th>尺码</th>
+                    <th>衣料</th>
+                    <th>价格</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>裙子</td>
+                    <td>001</td>
+                    <td>胡月明</td>
+                    <td>碎花裙</td>
+                    <td>39M</td>
+                    <td>100%纯羊毛</td>
+                    <td>190</td>
+                    <td>
+                      <div class="table-actions">
+                        <a href="javascript:;" class="edit-row">喜欢</a>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="chart" id="type-chart"></div>
+            </div>
+          </div>
+          <footer id="footer">衣橱应用</footer>
+		    </div>
+    	</div>
+    </div>  
+  </div>
+</body>
+<!-- 项目基本JS -->
+<script src="./js/common.js"></script>
+<!-- 当前页所需JS -->
+<script src="./js/chotherpressManage.js"></script>
+<script>
+  $().ready(function () {
+    clothCommon.init();
+    clothCommon.navs('#navs', 'chotherpressManage');
+
+    chotherpressManage.init();
+  });
+</script>
+</html>

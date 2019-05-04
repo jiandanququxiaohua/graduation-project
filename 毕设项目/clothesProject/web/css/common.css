@@ -1,0 +1,56 @@
+/*项目通用样式*/
+
+.page-actions {
+  border-bottom: 2px solid #e3e3e3;
+}
+
+.page-body {
+  margin-top: 16px;
+}
+
+.form-inline .form-group {
+  margin-right: 16px;
+  margin-bottom: 16px;
+}
+
+.btns-margin button {
+  margin-right: 16px;
+}
+
+.chart {
+  height: 400px;
+}
+
+.page-body > div {
+  padding: 8px;
+}
+
+/*通用类*/
+.clear-float::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.left {
+  float: left;
+}
+.right {
+	float: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.table-actions > a {
+  padding: 0 8px;
+  cursor: pointer;
+}

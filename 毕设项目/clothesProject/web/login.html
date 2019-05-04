@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>衣橱管理</title>
+  <!-- css -->
+  <link rel="stylesheet" href="./static/js/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/common.css">
+  <!-- 当前页面样式 -->
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<!-- 基本所需库JS -->
+	<script src="./static/js/jquery/jquery-3.3.1.js"></script>
+	<script src="./static/js/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div class="wrapper">
+			<div id="login">
+				<div class="login-main">
+					<div class="login-main-head">
+						<a href="./home.html" title="返回首页"><img class="head-img"src="./image/hs.png"></a>
+						<span class="login-main-head-title">衣橱管理</span>
+					</div>
+					<form class="login-form">
+						<div class="form-group">
+							<label for="username">用户名</label>
+							<input type="text" class="form-control" id="username" placeholder="请输入用户名">
+						</div>
+						<div class="form-group">
+							<label for="password">密码</label>
+							<input type="password" class="form-control" id="password" placeholder="请输入密码">
+						</div>
+						<button type="submit" class="btn btn-info login-submit-btn" data-loading-text="登录中...">登录</button>
+					</form>
+					<p class="clear-float" style="margin-top: 16px">
+						<span class="left">
+							<a href="./home.html">返回首页</a>
+						</span>
+						<span class="right">
+							<a href="./register.html">注册</a>
+						</span>
+					</p>
+					<p class="login-tip text-center">
+						<span >用户名：admin</span>
+						<span>密码：123456</span>
+					</p>
+				</div>   	
+			</div>
+		</div>
+	</div>
+  
+</body>
+<!-- 项目基本JS -->
+<script src="./js/common.js"></script>
+<!-- 当前页所需JS -->
+</html>
