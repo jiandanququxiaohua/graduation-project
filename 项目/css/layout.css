@@ -74,6 +74,7 @@
   flex: auto;
   flex-direction: column;
   overflow: auto;
+  overflow-x: hidden;
 }
 #content .content-body {
   flex: auto;
