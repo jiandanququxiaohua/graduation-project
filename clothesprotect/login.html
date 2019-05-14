@@ -7,6 +7,8 @@
   <title>衣橱管理</title>
   <!-- css -->
   <link rel="stylesheet" href="./static/js/bootstrap/css/bootstrap.min.css">
+  <link href="./static/js/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+  <link href="./static/js/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="./css/base.css">
   <link rel="stylesheet" href="./css/common.css">
   <!-- 当前页面样式 -->
@@ -14,6 +16,7 @@
 	<!-- 基本所需库JS -->
 	<script src="./static/js/jquery/jquery-3.3.1.js"></script>
 	<script src="./static/js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./static/js/jquery-ui/jquery-ui.min.js"></script>
 </head>
 <body>
 	<div id="app">
@@ -24,16 +27,16 @@
 						<a href="./home.html" title="返回首页"><img class="head-img"src="./image/hs.png"></a>
 						<span class="login-main-head-title">衣橱管理</span>
 					</div>
-					<form class="login-form">
+					<form id="login-form">
 						<div class="form-group">
 							<label for="username">用户名</label>
-							<input type="text" class="form-control" id="username" placeholder="请输入用户名">
+							<input type="text" class="form-control" id="username" name="name" placeholder="请输入用户名">
 						</div>
 						<div class="form-group">
 							<label for="password">密码</label>
-							<input type="password" class="form-control" id ="password" placeholder="请输入密码">
+							<input type="password" class="form-control" id ="password" name="psw" placeholder="请输入密码">
 						</div>
-						<button type="submit" class="btn btn-info login-submit-btn" data-loading-text="登录中...">登录</button>
+						<button type="button" class="btn btn-info login-submit-btn" data-loading-text="登录中...">登录</button>
 					</form>
 					<p class="clear-float" style="margin-top: 16px">
 						<span class="left">
@@ -56,4 +59,10 @@
 <!-- 项目基本JS -->
 <script src="./js/common.js"></script>
 <!-- 当前页所需JS -->
+<script src="./js/login.js"></script>
+<script>
+    $().ready(function () {
+        closeLogin.init();
+    });
+</script>
 </html>

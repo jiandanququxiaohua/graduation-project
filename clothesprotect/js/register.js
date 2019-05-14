@@ -1,33 +1,30 @@
-/**
- * login 登录
- */
-
-const closeLogin = {
+﻿const closeRegister = {
     init: function () {
         this.onBtn();
     },
     onBtn: function () {
-        $('.login-submit-btn').on('click', this.login);
+        $('.login-submit-btn').on('click', this.register);
     },
-  login: function () {
-        var formData = $('#login-form').serialize();
-        var submitBtn = $('.login-submit-btn').eq(0);
+    register: function () {
+        var formData = $('.register-form').eq(0).serialize();
+        var submitBtn = $('.register-submit-btn').eq(0);
         submitBtn.button('loading');
 
         $.ajax({
             type: 'get',
-            url: 'aspx/login.aspx',
+            url: 'aspx/register.aspx',
             data: formData,
             success: function (res) {
                 if (res.code + '' == '200') {
                     submitBtn.button('reset');
-                    window.location.href = './home,html';
+                    window.location.href = './login,html';
                 } else {
                     alert(res.Messge)
                 }
+               
             }
         })
 
-      return false;
-  }
+        return false;
+    }
 }
