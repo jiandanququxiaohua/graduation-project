@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -26,7 +26,7 @@
           <span>衣橱管理</span>
         </div>
         <div class="right cloth-header-user">
-          <span class="header-user">admin</span>&nbsp;|&nbsp;
+          <span class="header-user"></span>&nbsp;|&nbsp;
           <span class="logout">登出</span>
         </div>
       </header>
@@ -126,7 +126,8 @@
 <script src="./js/share.js"></script>
 <script>
   $().ready(function () {
-    clothCommon.init();
+      clothCommon.init();
+      clothCommon.user();
     clothCommon.navs('#navs', 'share');
 
     share.init();

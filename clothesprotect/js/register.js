@@ -3,11 +3,11 @@
         this.onBtn();
     },
     onBtn: function () {
-        $('.login-submit-btn').on('click', this.register);
+        $('.register-submit-btn').on('click', this.register);
     },
     register: function () {
         var formData = $('.register-form').eq(0).serialize();
-        var submitBtn = $('.register-submit-btn').eq(0);
+        var submitBtn = $('.register-submit-btn');
         submitBtn.button('loading');
 
         $.ajax({
@@ -15,12 +15,16 @@
             url: 'aspx/register.aspx',
             data: formData,
             success: function (res) {
-                if (res.code + '' == '200') {
-                    submitBtn.button('reset');
-                    window.location.href = './login,html';
+                console.log(res);
+                const resJson = JSON.parse(res);
+                if (resJson.Code + '' == '200') {
+                    alert('注册成功，请回到登录页登录');
+                    //window.location.href = './login.html';
                 } else {
-                    alert(res.Messge)
+                    //console.log(resJosn);
+                    alert(resJson.Message)
                 }
+                submitBtn.button('reset');
                
             }
         })

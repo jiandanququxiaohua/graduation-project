@@ -26,13 +26,13 @@ public partial class register : System.Web.UI.Page
         //var cc=Request.Params.Get("name") ?? "";
         try
         {
-            //注册           
+            //注册
             Response.Write(JsonConvert.SerializeObject(RegisterClothes(loginName, loginPsw, alias, age)));
             return;
         }
         catch (Exception ex)
         {
-            Response.Write(JsonConvert.SerializeObject(new Result { Code = 500, IsTrue = false, Messge = ex.ToString() }));
+            Response.Write(JsonConvert.SerializeObject(new Result { Code = 500, IsTrue = false, Message = ex.ToString() }));
         }
     }
 
@@ -46,13 +46,13 @@ public partial class register : System.Web.UI.Page
     /// <returns></returns>
     private Result RegisterClothes(string loginName, string loginPsw, string alias, string age)
     {
-        var result = new Result();
+        var result = new Result<List<User>>();
         //此处需优化，参数化处理
         var sqltextFomat = "insert into [clothes].[dbo].[user] (userName,password,age,alias) values ('{0}','{1}','{2}','{3}') ";
         var sqlText = string.Format(sqltextFomat, loginName, loginPsw, age, alias);
         dbhelperv2.ExecuteNonQuery(new List<string> { sqlText });
         result.Code = 200;
-        result.Messge = "成功！";
+        result.Message = "成功！";
         result.IsTrue = true;
         return result;
     }

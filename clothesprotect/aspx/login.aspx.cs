@@ -30,7 +30,7 @@ public partial class login : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Response.Write(JsonConvert.SerializeObject(new Result { Code = 500, IsTrue = false, Messge = ex.ToString() }));
+            Response.Write(JsonConvert.SerializeObject(new Result { Code = 500, IsTrue = false, Message = ex.ToString() }));
         }
     }
 
@@ -51,14 +51,14 @@ public partial class login : System.Web.UI.Page
         {
             //Error todo  
             result.Code = 403;
-            result.Messge = "查无此人！";
+            result.Message = "查无此人！";
             result.IsTrue = false;
             result.Date = new List<User>();
             return result;
         }
         var users = dt.ToUsers();
         result.Code = 200;
-        result.Messge = "成功！";
+        result.Message = "成功！";
         result.Date = users;
         result.IsTrue = true;
         return result;

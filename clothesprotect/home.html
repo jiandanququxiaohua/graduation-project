@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<title>衣橱欢迎界面</title>
@@ -24,7 +24,7 @@
           <span>衣橱管理</span>
         </div>
         <div class="right cloth-header-user">
-          <span class="header-user">admin</span>&nbsp;|&nbsp;
+          <span class="header-user"></span>&nbsp;|&nbsp;
           <span class="logout">登出</span>
         </div>
       </header>
@@ -61,7 +61,8 @@
 <script src="./js/home.js"></script>
 <script>
   $().ready(function () {
-    clothCommon.init();
+      clothCommon.init();
+      clothCommon.user();
 
     home.init();
   });

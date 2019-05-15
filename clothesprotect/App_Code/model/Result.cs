@@ -11,7 +11,7 @@ public class Result
     public int Code { get; set; }
 
     public bool IsTrue;
-    public string Messge { get; set; }
+    public string Message { get; set; }
 
 }
 

@@ -26,7 +26,7 @@
           <span>衣橱管理</span>
         </div>
         <div class="right cloth-header-user">
-          <span class="header-user">admin</span>&nbsp;|&nbsp;
+          <span class="header-user"></span>&nbsp;|&nbsp;
           <span class="logout">登出</span>
         </div>
       </header>
@@ -39,30 +39,30 @@
           <div class="content-body">
             <div class="row figure">
               <div class="col-md-7 col-xs-12">
-                <form>
+                <form id="figure-form">
                   <div class="form-group">
                     <label for="weight">体重</label>
-                    <input type="text" class="form-control" id="weight" placeholder="请填写体重">
+                    <input type="text" class="form-control" name="weight" id="weight" placeholder="请填写体重">
                   </div>
                   <div class="form-group">
                     <label for="stature">身高</label>
-                    <input type="text" class="form-control" id="stature" placeholder="请填写身高">
+                    <input type="text" class="form-control" name="stature" id="stature" placeholder="请填写身高">
                   </div>
                   <div class="form-group">
                     <label for="chestSize">胸围</label>
-                    <input type="text" class="form-control" id="chestSize" placeholder="请填写胸围">
+                    <input type="text" class="form-control" name="chestSize" id="chestSize" placeholder="请填写胸围">
                   </div>
                   <div class="form-group">
                     <label for="waistSize">腰围</label>
-                    <input type="text" class="form-control" id="waistSize" placeholder="请填写腰围">
+                    <input type="text" class="form-control" id="waistSize" name="waistSize" placeholder="请填写腰围">
                   </div>
                   <div class="form-group">
                     <label for="hiplineSize">臀围</label>
-                    <input type="text" class="form-control" id="hiplineSize" placeholder="请填写臀围">
+                    <input type="text" class="form-control" id="hiplineSize" name="hiplineSize" placeholder="请填写臀围">
                   </div>
                   <div class="form-group text-right">
-                    <button type="submit" class="btn btn-info" style="margin-right: 16px;">保存</button>
-                    <button class="btn btn-default">取消</button>
+                    <button type="button" class="btn btn-info figure-submit" style="margin-right: 16px;" data-loading-text="登录中...">保存</button>
+                    <button class="btn btn-default cancel-btn">取消</button>
                   </div>
                 </form>
               </div>
@@ -79,7 +79,7 @@
             </div>
           </div>
           <footer id="footer">衣橱应用</footer>
-		    </div>
+		 </div>
     	</div>
     </div>  
   </div>
@@ -87,10 +87,15 @@
 <!-- 项目基本JS -->
 <script src="./js/common.js"></script>
 <!-- 当前页所需JS -->
+<script src="./js/figure.js"></script>
 <script>
   $().ready(function () {
-    clothCommon.init();
-    clothCommon.navs('#navs', 'figure');
+      clothCommon.init();
+      clothCommon.user();
+      clothCommon.navs('#navs', 'figure');
+
+      closeFigure.init();
+
   });
 </script>
 </html>

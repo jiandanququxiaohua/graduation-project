@@ -38,9 +38,6 @@
                 <div class="title-img">
                   <img src="image/title.png" >
                 </div>
-                <p class="home-title-link text-center">
-                  <a href="./chothespress.html" target="_self" class="btn btn-info" role="button">进入我的衣橱</a>
-                </p>
               </div>
               <div class="citi">
                 <img src="./image/citi_bg.png" alt="">

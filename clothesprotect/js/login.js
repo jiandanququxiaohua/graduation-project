@@ -11,7 +11,7 @@ const closeLogin = {
     },
   login: function () {
         var formData = $('#login-form').serialize();
-        var submitBtn = $('.login-submit-btn').eq(0);
+        var submitBtn = $('.login-submit-btn');
         submitBtn.button('loading');
 
         $.ajax({
@@ -19,12 +19,15 @@ const closeLogin = {
             url: 'aspx/login.aspx',
             data: formData,
             success: function (res) {
-                if (res.code + '' == '200') {
-                    submitBtn.button('reset');
-                    window.location.href = './home,html';
+                const resJson = JSON.parse(res);
+                if (resJson.Code + '' == '200') {
+                    clothCommon.setUser(resJson.Data);
+                    window.location.href = './home.html';
                 } else {
-                    alert(res.Messge)
+                    //console.log(resJosn);
+                    alert(resJson.Message)
                 }
+                submitBtn.button('reset');
             }
         })
 
