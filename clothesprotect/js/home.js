@@ -31,7 +31,7 @@ const mockShare = [{
 const home = {
   init: function () {
     this.renderShare();
-  },
+  }, 
   renderShare: function () {
     const shareContainer = $('#home-share');
     const shareList = mockShare.map(function (item) {

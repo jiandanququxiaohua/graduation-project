@@ -185,49 +185,58 @@
           <h4 class="modal-title" id="modalTitle">衣物配置</h4>
         </div>
         <div class="modal-body">
-          <form class="form-inline">
-            <div class="wear-table-bottom">
-              <div class="form-group">
-                <label for="type" class="title">分类</label>
-                <input type="text" class="form-control" id="type" placeholder="分类">
-              </div>
-
-              <div class="form-group wear-table-left">
-                <label for="No" class="title">编号</label>
-                <input type="text" class="form-control" id="No" placeholder="编号">
-              </div>
-            </div>
-
-            <div class="wear-table-bottom">
-              <div class="form-group">
-                <label for="brand" class="title">品牌</label>
-                <input type="text" class="form-control" id="brand" placeholder="品牌">
-              </div>
-              <div class="form-group wear-table-left">
-                <label for="name" class="title">名称</label>
-                <input type="text" class="form-control" id="name" placeholder="名称">
-              </div>
-            </div>
-
-            <div class="wear-table-bottom">
-              <div class="form-group">
-                <label for="size" class="title">尺码</label>
-                <input type="text" class="form-control" id="size" placeholder="尺码">
-              </div>
-              <div class="form-group wear-table-left">
-                <label for="clothe" class="title">衣料</label>
-                <input type="text" class="form-control" id="clothe" placeholder="衣料">
-              </div>
-            </div>
-
-            <div class="wear-table-bottom">
-              <div class="form-group">
-                <label for="price" class="title">价格</label>
-                <input type="text" class="form-control" id="price" placeholder="价格">
-              </div>
-            </div>
-
-          </form>
+            <form class="form-inline">
+                <div class="wear-table-bottom">
+                    <div class="form-group">
+                        <label for="cloth-type" class="title">分类</label>
+                        <select class="form-control" id="cloth-type" name="clothTypeId">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="form-group wear-table-left">
+                        <label for="color" class="title">颜色</label>
+                        <input type="text" class="form-control" id="color" name="color" placeholder="颜色">
+                    </div>
+                </div>
+                <div class="wear-table-bottom">
+                    <div class="form-group">
+                        <label for="brand" class="title">品牌</label>
+                        <input type="text" class="form-control" id="brand" name="brand" placeholder="品牌">
+                    </div>
+                    <div class="form-group wear-table-left">
+                        <label for="name" class="title">名称</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="名称">
+                    </div>
+                </div>
+                <div class="wear-table-bottom">
+                    <div class="form-group">
+                        <label for="size" class="title">尺码</label>
+                        <input type="text" class="form-control" id="size" name="size" placeholder="尺码">
+                    </div>
+                    <div class="form-group wear-table-left">
+                        <label for="fabric" class="title">衣料</label>
+                        <input type="text" class="form-control" id="fabric" name="fabric" placeholder="衣料">
+                    </div>
+                </div>
+                <div class="wear-table-bottom">
+                    <div class="form-group">
+                        <label for="price" class="title">价格</label>
+                        <input type="text" class="form-control" id="price" name="price" placeholder="价格">
+                    </div>
+                    <div class="form-group">
+                        <label for="season" class="title">适应季节</label>
+                        <input type="text" class="form-control" id="season" name="season" placeholder="适应季节">
+                    </div>
+                </div>
+                <div class="form-group wear-table-bottom">
+                    <label>点击选择文件</label>
+                    <input id="fileInput" type="file" name="imgUrl">
+                </div>
+            </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -241,7 +250,6 @@
 <script src="./js/common.js"></script>
 <!-- 当前页所需JS -->
 <script src="./js/chothespress.js"></script>
-
 <script>
   $().ready(function () {
       clothCommon.init();

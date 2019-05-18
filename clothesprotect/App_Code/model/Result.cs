@@ -18,5 +18,5 @@ public class Result
 
 public class Result<T> : Result
 {
-    public T Date { set; get; }
+    public T Data { set; get; }
 }

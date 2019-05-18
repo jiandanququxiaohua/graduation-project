@@ -53,13 +53,13 @@ public partial class login : System.Web.UI.Page
             result.Code = 403;
             result.Message = "查无此人！";
             result.IsTrue = false;
-            result.Date = new List<User>();
+            result.Data = new List<User>();
             return result;
         }
         var users = dt.ToUsers();
         result.Code = 200;
         result.Message = "成功！";
-        result.Date = users;
+        result.Data = users;
         result.IsTrue = true;
         return result;
     }

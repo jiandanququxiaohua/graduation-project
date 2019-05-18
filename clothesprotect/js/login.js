@@ -21,7 +21,7 @@ const closeLogin = {
             success: function (res) {
                 const resJson = JSON.parse(res);
                 if (resJson.Code + '' == '200') {
-                    clothCommon.setUser(resJson.Data);
+                    clothCommon.setUser(resJson.Data && resJson.Data[0]);
                     window.location.href = './home.html';
                 } else {
                     //console.log(resJosn);

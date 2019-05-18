@@ -31,40 +31,49 @@ const MENUS = [
 const USER_KEY = 'USER_KEY';
 
 const clothCommon = {
-  init: function () {
-    $('.logout').eq(0).on('click', function () {
-      clothCommon.logout();
-    })
-  },
-  getUser: function () {
-      var user = localStorage.getItem(USER_KEY);
-      return JSON.parse(user);
-  },
+    init: function () {
+        $('.logout').eq(0).on('click', function () {
+            clothCommon.logout();
+        })
+    },
+    getUser: function () {
+        var user = localStorage.getItem(USER_KEY);
+        return JSON.parse(user);
+    },
     setUser: function (data) {
         localStorage.setItem(USER_KEY, JSON.stringify(data));
     },
     destory: function (data) {
         localStorage.removeItem(USER_KEY);
     },
-  logout: function () {
-    window.location = './login.html';
-  },
-  navs: function (select='#navs', active) {
-    const navsBox = $(select);
-    const navMenus = MENUS.map((item) => {
-      var isActive = item.key == active ? 'active-nav' : '';
-      const nav = "<li class=" + isActive + ">" +
-      "<a href=" + item.href + " target='_self'>" + item.title + "</a>" + 
-      "</li>";
+    logout: function () {
+        this.destory();
+        window.location = './login.html';
+    },
+    navs: function (select='#navs', active) {
+        const navsBox = $(select);
+        const navMenus = MENUS.map((item) => {
+            var isActive = item.key == active ? 'active-nav' : '';
+            const nav = "<li class=" + isActive + ">" +
+            "<a href=" + item.href + " target='_self'>" + item.title + "</a>" + 
+            "</li>";
+            return nav;
+        }).join('');
 
-      return nav;
-    }).join('');
-
-    const navsContent = "<ul class='nav-menus'>" + navMenus + "</ul>"
-    navsBox.html(navsContent);
+        const navsContent = "<ul class='nav-menus'>" + navMenus + "</ul>"
+        navsBox.html(navsContent);
     },
     user: function () {
         var user = this.getUser();
         $('.header-user').html(user.userName);
+    },
+    getClothType: function () {
+        $.ajax({
+            type: 'GET',
+            url: 'aspx/clothType.aspx'.
+            success: function (res) {
+
+            }
+        });
     }
 }
