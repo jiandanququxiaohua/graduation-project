@@ -21,7 +21,7 @@ public static class ConvertCommon
         {
             var model = new User();
             model.age = reurnSafeStr(row["age"]);
-            model.userName= reurnSafeStr(row["userName"]);
+            model.userName = reurnSafeStr(row["userName"]);
             model.password = reurnSafeStr(row["password"]);
             model.alias = reurnSafeStr(row["alias"]);
             model.id = Convert.ToInt32(row["id"]);
@@ -31,9 +31,9 @@ public static class ConvertCommon
 
     }
 
- public static List<figure> ToFigures(this DataTable dt)
+    public static List<Figure> ToFigures(this DataTable dt)
     {
-        var result = new List<figure>();
+        var result = new List<Figure>();
         if (dt == null || dt.Rows.Count == 0)
         {
             return result;
@@ -41,13 +41,13 @@ public static class ConvertCommon
 
         foreach (DataRow row in dt.Rows)
         {
-            var model = new figure();
+            var model = new Figure();
             model.userId = reurnSafeStr(row["userId"]);
-            model.weight= reurnSafeStr(row["weight"]);
+            model.weight = reurnSafeStr(row["weight"]);
             model.stature = reurnSafeStr(row["stature"]);
             model.chestSize = reurnSafeStr(row["chestSize"]);
             model.waistSize = reurnSafeStr(row["waistSize"]);
-            model.hiplineSize = reurnSafeStr(row["hiplineSize"]);           
+            model.hiplineSize = reurnSafeStr(row["hiplineSize"]);
             model.id = Convert.ToInt32(row["id"]);
             result.Add(model);
         }
@@ -57,7 +57,7 @@ public static class ConvertCommon
 
     public static List<Cloth> ToCloths(this DataTable dt)
     {
-        var result = new List<figure>();
+        var result = new List<Cloth>();
         if (dt == null || dt.Rows.Count == 0)
         {
             return result;
@@ -65,28 +65,28 @@ public static class ConvertCommon
 
         foreach (DataRow row in dt.Rows)
         {
-            var model = new figure();
+            var model = new Cloth();
             model.userId = reurnSafeStr(row["userId"]);
-            model.clothTypeId= reurnSafeStr(row["clothTypeId"]);
-            model.clothName= reurnSafeStr(row["clothName"]);
-            model.price= reurnSafeStr(row["price"]);
-            model.brand= reurnSafeStr(row["brand"]);
+            model.clothTypeId = reurnSafeStr(row["clothTypeId"]);
+            model.clothName = reurnSafeStr(row["clothName"]);
+            model.price = reurnSafeStr(row["price"]);
+            model.brand = reurnSafeStr(row["brand"]);
             model.fabric = reurnSafeStr(row["fabric"]);
             model.season = reurnSafeStr(row["season"]);
             model.size = reurnSafeStr(row["size"]);
-            model.color = reurnSafeStr(row["color"]);   
-            model.imgUrl = reurnSafeStr(row["imgUrl"]);  
-            model.createTime = reurnSafeStr(row["createTime"]);  
-            model.endTime = reurnSafeStr(row["endTime"]);          
+            model.color = reurnSafeStr(row["color"]);
+            model.imgUrl = reurnSafeStr(row["imgUrl"]);
+            model.createTime = reurnSafeStr(row["createTime"]);
+            model.endTime = reurnSafeStr(row["endTime"]);
             model.id = Convert.ToInt32(row["id"]);
             result.Add(model);
         }
         return result;
 
     }
-     public static List<ColthType> ToClothTypes(this DataTable dt)
+    public static List<ClothType> ToClothTypes(this DataTable dt)
     {
-        var result = new List<ColthType>();
+        var result = new List<ClothType>();
         if (dt == null || dt.Rows.Count == 0)
         {
             return result;
@@ -94,8 +94,8 @@ public static class ConvertCommon
 
         foreach (DataRow row in dt.Rows)
         {
-            var model = new ColthType();
-            model.type = reurnSafeStr(row["type"]);           
+            var model = new ClothType();
+            model.type = reurnSafeStr(row["type"]);
             model.id = Convert.ToInt32(row["id"]);
             result.Add(model);
         }
@@ -103,7 +103,7 @@ public static class ConvertCommon
 
     }
 
-      public static List<Chuanda> ToChuanDa(this DataTable dt)
+    public static List<Chuanda> ToChuanDa(this DataTable dt)
     {
         var result = new List<Chuanda>();
         if (dt == null || dt.Rows.Count == 0)
@@ -114,12 +114,14 @@ public static class ConvertCommon
         foreach (DataRow row in dt.Rows)
         {
             var model = new Chuanda();
-            model.userId = reurnSafeStr(row["userId"]);  
-             model.styleId = reurnSafeStr(row["styleId"]);     
-              model.clothIds = reurnSafeStr(row["clothIds"]);     
-               model.describe = reurnSafeStr(row["describe"]);     
-                model.createTime = reurnSafeStr(row["createTime"]);     
-                 model.endTime = reurnSafeStr(row["endTime"]);              
+            model.userId = reurnSafeStr(row["userId"]);
+            model.styleId = reurnSafeStr(row["styleId"]);
+            model.clothIds = reurnSafeStr(row["clothIds"]);
+            model.describe = reurnSafeStr(row["describe"]);
+            model.createTime = reurnSafeStr(row["createTime"]);
+            model.endTime = reurnSafeStr(row["endTime"]);
+            model.sName = reurnSafeStr(row["sName"]);
+            model.styledescribe = reurnSafeStr(row["styledescribe"]);
             model.id = Convert.ToInt32(row["id"]);
             result.Add(model);
         }
@@ -138,8 +140,8 @@ public static class ConvertCommon
         foreach (DataRow row in dt.Rows)
         {
             var model = new Style();
-            model.sName = reurnSafeStr(row["sName"]);     
-             model.describe = reurnSafeStr(row["describe"]);             
+            model.sName = reurnSafeStr(row["sName"]);
+            model.describe = reurnSafeStr(row["describe"]);
             model.id = Convert.ToInt32(row["id"]);
             result.Add(model);
         }
@@ -149,7 +151,7 @@ public static class ConvertCommon
 
     private static string reurnSafeStr(object obj)
     {
-        if(obj==null || obj == DBNull.Value)
+        if (obj == null || obj == DBNull.Value)
         {
             return string.Empty;
         }

@@ -22,4 +22,8 @@ public class Chuanda
     public string createTime { set; get; }
 
     public string endTime { set; get; }
+
+    public string sName { set; get; }
+
+    public string styledescribe { set; get; }
 }

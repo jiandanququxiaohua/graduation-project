@@ -13,33 +13,75 @@ using Newtonsoft.Json;
 
 public partial class figure : System.Web.UI.Page
 {
-    DbHelperV2 dbhelperv2 = new DbHelperV2();
+    //type=1  get; type=2 add;type=3 edit;type=4 delete
+    int[] _types = new int[] { 1, 2, 3, 4 };
     protected void Page_Load(object sender, EventArgs e)
     {
-        var userId = Request.QueryString.Get("userId") ?? "";
-        var type = Request.QueryString.Get("type") ?? "";
-        var weight = Request.QueryString.Get("weight") ?? "";
-        var stature = Request.QueryString.Get("stature") ?? "";
-        var chestSize = Request.QueryString.Get("chestSize") ?? "";
-        var waistSize = Request.QueryString.Get("waistSize") ?? "";
-        var hiplineSize = Request.QueryString.Get("hiplineSize") ?? "";
 
+        //type=1  get; type=2 add;type=3 edit
+        var type = Request.QueryString.Get("type") ?? "";
+        var inttype = 0;
+        int.TryParse(type, out inttype);
+        if (!_types.Contains(inttype))
+        {
+            //type值不合法
+            Response.Write(JsonConvert.SerializeObject(new Result { Code = 500, IsTrue = false, Message = "type只能赋值1、2、3、4" }));
+            return;
+        }
         //post取参
         //var cc=Request.Params.Get("name") ?? "";
         try
         {
-            if (type == "0") // 获取
+            //查找
+            if (inttype == 1)
             {
 
-            } else if (type == "1") // 新增
-            {
-                Response.Write(JsonConvert.SerializeObject(addFigureClothes(userId, weight, stature, chestSize, waistSize, hiplineSize)));
+                //当前用户id
+                var userid = Request.Params.Get("userid") ?? "";
+
+                Response.Write(JsonConvert.SerializeObject(figureHelper.GetInfoById(Convert.ToInt32(userid))));
                 return;
-            } else
+            }
+            //编辑
+            if (inttype == 2)
             {
 
+                //类型主键id
+                var id = Request.Params.Get("id") ?? "";
+                var intid = Convert.ToInt32(id);
+
+                var userId = Request.QueryString.Get("userid") ?? "";
+                var weight = Request.QueryString.Get("weight") ?? "";
+                var stature = Request.QueryString.Get("stature") ?? "";
+                var chestSize = Request.QueryString.Get("chestSize") ?? "";
+                var waistSize = Request.QueryString.Get("waistSize") ?? "";
+                var hiplineSize = Request.QueryString.Get("hiplineSize") ?? "";
+
+                Response.Write(JsonConvert.SerializeObject(figureHelper.EditFigure(Convert.ToInt32(userId), weight, stature, chestSize, waistSize, hiplineSize, intid)));
+                return;
             }
-            
+            //新增
+            if (inttype == 3)
+            {
+                var userId = Request.QueryString.Get("userid") ?? "";
+                var weight = Request.QueryString.Get("weight") ?? "";
+                var stature = Request.QueryString.Get("stature") ?? "";
+                var chestSize = Request.QueryString.Get("chestSize") ?? "";
+                var waistSize = Request.QueryString.Get("waistSize") ?? "";
+                var hiplineSize = Request.QueryString.Get("hiplineSize") ?? "";
+
+                Response.Write(JsonConvert.SerializeObject(figureHelper.AddFigure(Convert.ToInt32(userId), weight, stature, chestSize, waistSize, hiplineSize)));
+                return;
+            }
+            //删除
+            if (inttype == 4)
+            {
+                //类型主键id
+                var id = Request.Params.Get("id") ?? "";
+                var intid = Convert.ToInt32(id);
+                Response.Write(JsonConvert.SerializeObject(figureHelper.DeleteFigureById(intid)));
+                return;
+            }
         }
         catch (Exception ex)
         {
@@ -47,25 +89,5 @@ public partial class figure : System.Web.UI.Page
         }
     }
 
-    /// <summary>
-    /// 注册
-    /// </summary>
-    /// <param name="loginName"></param>
-    /// <param name="loginPsw"></param>
-    /// <param name="alias"></param>
-    /// <param name="age"></param>
-    /// <returns></returns>
-    private Result addFigureClothes(string userId, string weight, string stature, string chestSize, string waistSize, string hiplineSize)
-    {
-        var result = new Result<List<User>>();
-        //此处需优化，参数化处理
-        var sqltextFomat = "insert into [clothes].[dbo].[figure] (userId, weight, stature, chestSize, waistSize, hiplineSize) values ('{0}','{1}','{2}','{3}','{4}','{5}') ";
-        var sqlText = string.Format(sqltextFomat, userId, weight, stature, chestSize, waistSize, hiplineSize);
-        dbhelperv2.ExecuteNonQuery(new List<string> { sqlText });
-        result.Code = 200;
-        result.Message = "成功！";
-        result.IsTrue = true;
-        return result;
-    }
 
 }
