@@ -16,4 +16,5 @@ public class Figure
     public string chestSize { set; get; }
     public string waistSize { set; get; }
     public string hiplineSize { set; get; }
+    public int id { set; get; }
 }

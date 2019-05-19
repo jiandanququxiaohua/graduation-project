@@ -31,6 +31,122 @@ public static class ConvertCommon
 
     }
 
+ public static List<figure> ToFigures(this DataTable dt)
+    {
+        var result = new List<figure>();
+        if (dt == null || dt.Rows.Count == 0)
+        {
+            return result;
+        }
+
+        foreach (DataRow row in dt.Rows)
+        {
+            var model = new figure();
+            model.userId = reurnSafeStr(row["userId"]);
+            model.weight= reurnSafeStr(row["weight"]);
+            model.stature = reurnSafeStr(row["stature"]);
+            model.chestSize = reurnSafeStr(row["chestSize"]);
+            model.waistSize = reurnSafeStr(row["waistSize"]);
+            model.hiplineSize = reurnSafeStr(row["hiplineSize"]);           
+            model.id = Convert.ToInt32(row["id"]);
+            result.Add(model);
+        }
+        return result;
+
+    }
+
+    public static List<Cloth> ToCloths(this DataTable dt)
+    {
+        var result = new List<figure>();
+        if (dt == null || dt.Rows.Count == 0)
+        {
+            return result;
+        }
+
+        foreach (DataRow row in dt.Rows)
+        {
+            var model = new figure();
+            model.userId = reurnSafeStr(row["userId"]);
+            model.clothTypeId= reurnSafeStr(row["clothTypeId"]);
+            model.clothName= reurnSafeStr(row["clothName"]);
+            model.price= reurnSafeStr(row["price"]);
+            model.brand= reurnSafeStr(row["brand"]);
+            model.fabric = reurnSafeStr(row["fabric"]);
+            model.season = reurnSafeStr(row["season"]);
+            model.size = reurnSafeStr(row["size"]);
+            model.color = reurnSafeStr(row["color"]);   
+            model.imgUrl = reurnSafeStr(row["imgUrl"]);  
+            model.createTime = reurnSafeStr(row["createTime"]);  
+            model.endTime = reurnSafeStr(row["endTime"]);          
+            model.id = Convert.ToInt32(row["id"]);
+            result.Add(model);
+        }
+        return result;
+
+    }
+     public static List<ColthType> ToClothTypes(this DataTable dt)
+    {
+        var result = new List<ColthType>();
+        if (dt == null || dt.Rows.Count == 0)
+        {
+            return result;
+        }
+
+        foreach (DataRow row in dt.Rows)
+        {
+            var model = new ColthType();
+            model.type = reurnSafeStr(row["type"]);           
+            model.id = Convert.ToInt32(row["id"]);
+            result.Add(model);
+        }
+        return result;
+
+    }
+
+      public static List<Chuanda> ToChuanDa(this DataTable dt)
+    {
+        var result = new List<Chuanda>();
+        if (dt == null || dt.Rows.Count == 0)
+        {
+            return result;
+        }
+
+        foreach (DataRow row in dt.Rows)
+        {
+            var model = new Chuanda();
+            model.userId = reurnSafeStr(row["userId"]);  
+             model.styleId = reurnSafeStr(row["styleId"]);     
+              model.clothIds = reurnSafeStr(row["clothIds"]);     
+               model.describe = reurnSafeStr(row["describe"]);     
+                model.createTime = reurnSafeStr(row["createTime"]);     
+                 model.endTime = reurnSafeStr(row["endTime"]);              
+            model.id = Convert.ToInt32(row["id"]);
+            result.Add(model);
+        }
+        return result;
+
+    }
+
+    public static List<Style> ToStyles(this DataTable dt)
+    {
+        var result = new List<Style>();
+        if (dt == null || dt.Rows.Count == 0)
+        {
+            return result;
+        }
+
+        foreach (DataRow row in dt.Rows)
+        {
+            var model = new Style();
+            model.sName = reurnSafeStr(row["sName"]);     
+             model.describe = reurnSafeStr(row["describe"]);             
+            model.id = Convert.ToInt32(row["id"]);
+            result.Add(model);
+        }
+        return result;
+
+    }
+
     private static string reurnSafeStr(object obj)
     {
         if(obj==null || obj == DBNull.Value)

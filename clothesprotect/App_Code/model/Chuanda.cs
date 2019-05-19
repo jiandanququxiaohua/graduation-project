@@ -11,6 +11,7 @@ public class Chuanda
     public int id { set; get; }
 
     public string userId { set; get; }
+     public string name { set; get; }
 
     public string styleId { set; get; }
 
