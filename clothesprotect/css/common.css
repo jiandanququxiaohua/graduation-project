@@ -54,3 +54,11 @@
   padding: 0 8px;
   cursor: pointer;
 }
+
+.icons-list > i {
+  padding: 0 4px;
+}
+
+.form-item-box {
+  margin-bottom: 16px;
+}

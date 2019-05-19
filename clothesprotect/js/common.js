@@ -6,6 +6,11 @@
 
 const MENUS = [
     {
+        title: '衣橱概览',
+        key: 'chotherpressManage',
+        href: './chotherpressManage.html'
+    },
+    {
         title: '我的衣橱',
         key: 'chothespress',
         href: './chothespress.html'
@@ -13,10 +18,6 @@ const MENUS = [
         title: '我的穿搭',
         key: 'wear',
         href: './wear.html'
-    }, {
-        title: '衣橱管理',
-        key: 'chotherpressManage',
-        href: './chotherpressManage.html'
     }, {
         title: '我的身材',
         key: 'figure',
@@ -67,15 +68,15 @@ const clothCommon = {
     },
     user: function () {
         var user = this.getUser();
-        $('.header-user').html(user.userName);
+        $('.header-user').html(user ? user.userName : '');
     },
     getClothType: function () {
         $.ajax({
             type: 'GET',
             url: 'aspx/clothType.aspx',
-                success: function(res) {
+            success: function(res) {
 
-                }
+            }
         });
     }
 }
