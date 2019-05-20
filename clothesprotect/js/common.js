@@ -31,13 +31,59 @@ const MENUS = [
 
 const USER_KEY = 'USER_KEY';
 
-console.log('df')
+$.ajaxSetup({
+    dataType: "json",
+    error: function (jqXHR, textStatus, errorThrown) {
+        switch (jqXHR.status) {
+            case (500):
+                clothCommon.Message('danger', '服务错误');
+                break;
+            case (401):
+                clothCommon.Message('danger', '未登录');
+                break;
+            case (403):
+                clothCommon.Message('danger', '无权限执行此操作');
+                break;
+            case (408):
+                clothCommon.Message('danger', '请求超时');
+                break;
+            default:
+                clothCommon.Message('danger', '未知错误,请联系管理员');
+        }
+    },
+    complete: function (xhr) {
+        const res = xhr.responseJSON || {};
+        const status = xhr.status;
+        if (status == 200) {
+            if (res.Code + '' !== '200') {
+                clothCommon.Message('danger', '接口调用错误');
+            }
+        }
+
+    },
+    cache: false
+});
 
 const clothCommon = {
     init: function () {
         $('.logout').eq(0).on('click', function () {
             clothCommon.logout();
         })
+    },
+    Message: function (type = 'success', message = 'success') {
+        var len = $('.global-message').length;
+
+        var messageEle = `
+        <div class="alert alert-${type} alert-dismissible global-message" role="alert" data-num="${len}" style="display: none;">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          ${message}
+        </div>
+        `
+        $('body').append(messageEle);
+        $('.global-message').eq(len).fadeIn();
+        setTimeout(function () {
+            $('.global-message').eq(len).fadeOut();
+        }, 2000);
     },
     getUser: function () {
         var user = localStorage.getItem(USER_KEY);
@@ -74,11 +120,9 @@ const clothCommon = {
         $.ajax({
             type: 'GET',
             url: 'aspx/clothType.aspx',
-            success: function(res) {
+            success: function (res) {
 
             }
         });
     }
 }
-
-console.log('clothCommon')

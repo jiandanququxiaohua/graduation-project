@@ -15,7 +15,7 @@ public partial class share : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //type=1  get; type=2 add;type=3 edit
-        var type = Request.QueryString.Get("type") ?? "";
+        var type = Request.Params.Get("type") ?? "";
         var inttype = 0;
         int.TryParse(type, out inttype);
         if (!_types.Contains(inttype))

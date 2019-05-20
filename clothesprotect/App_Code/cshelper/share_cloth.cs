@@ -20,7 +20,7 @@ public class share_cloth
     {
         var result = new Result<List<Share>>();
         //此处需优化，参数化处理
-        var sqltextFomat = "select * from [clothes].[dbo].[share]";
+        var sqltextFomat = "select a.id, clothId, date, describe, b.clothName from [clothes].[dbo].[share] as a, [clothes].[dbo].[cloth] as b where a.clothId=b.id";
         var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat));
         if (dt == null || dt.Rows.Count == 0)
         {
@@ -43,7 +43,7 @@ public class share_cloth
     {
         var result = new Result<List<Share>>();
         //此处需优化，参数化处理
-        var sqltextFomat = "select * from [clothes].[dbo].[share] where userId='{0}'";
+        var sqltextFomat = "select a.id, clothId, date, describe, b.clothName from [clothes].[dbo].[share] as a, [clothes].[dbo].[cloth] as b where a.clothId=b.id and userId='{0}'";
         var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, userId));
         if (dt == null || dt.Rows.Count == 0)
         {
