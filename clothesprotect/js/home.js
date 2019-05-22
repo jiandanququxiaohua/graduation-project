@@ -42,7 +42,8 @@ const home = {
                 type: 1,
             },
             success: function (res) {
-                _this.mockShare = res.Data || mockShare || [];
+                const resJson = JSON.parse(res);
+                _this.mockShare = resJson.Data || mockShare || [];
                 _this.renderShare();
             }
         });
