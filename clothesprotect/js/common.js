@@ -19,13 +19,17 @@ const MENUS = [
         key: 'wear',
         href: './wear.html'
     }, {
+        title: '收藏与分享',
+        key: 'share',
+        href: './share.html'
+    }, {
         title: '我的身材',
         key: 'figure',
         href: './figure.html'
     }, {
-        title: '收藏与分享',
-        key: 'share',
-        href: './share.html'
+        title: '个人信息',
+        key: 'user',
+        href: './user.html'
     }
 ];
 
