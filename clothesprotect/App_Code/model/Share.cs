@@ -16,4 +16,6 @@ public class Share
 
     public string describe { set; get; }
 
+    public string belong { set; get; }
+
 }

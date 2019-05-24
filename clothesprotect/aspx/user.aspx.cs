@@ -11,7 +11,7 @@ using DBUtilityV2;
 using Newtonsoft.Json;
 
 
-public partial class register : System.Web.UI.Page
+public partial class user : System.Web.UI.Page
 {
     DbHelperV2 dbhelperv2 = new DbHelperV2();
     protected void Page_Load(object sender, EventArgs e)

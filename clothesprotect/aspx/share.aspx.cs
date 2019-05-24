@@ -61,7 +61,8 @@ public partial class share : System.Web.UI.Page
                 var clothId = Request.Params.Get("clothId") ?? "";
                 var describe = Request.Params.Get("describe") ?? "";
                 var date = Request.Params.Get("date") ?? "";
-                Response.Write(JsonConvert.SerializeObject(collcloth.share_insert(clothId, describe, date)));
+                var belong = Request.Params.Get("belong") ?? "";
+                Response.Write(JsonConvert.SerializeObject(collcloth.share_insert(clothId, describe, belong, date)));
                 return;
             }
             //删除

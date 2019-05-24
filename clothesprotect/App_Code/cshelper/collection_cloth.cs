@@ -20,7 +20,7 @@ public class collection_cloth
     {
         var result = new Result<List<Collection>>();
         //此处需优化，参数化处理
-        var sqltextFomat = "select * from [clothes].[dbo].[collection] where userId='{0}'";
+        var sqltextFomat = "select a.id, clothId, startTime, endTime, b.clothName, b.price, b.fabric from [clothes].[dbo].[collection] as a, [clothes].[dbo].[cloth] as b where a.clothId=b.id";
         var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, userId));
         if (dt == null || dt.Rows.Count == 0)
         {
