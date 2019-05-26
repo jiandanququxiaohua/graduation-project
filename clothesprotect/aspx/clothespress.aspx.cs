@@ -15,7 +15,7 @@ public partial class clothespress : System.Web.UI.Page
     {
 
         //type=1  get; type=2 add;type=3 edit
-        var type = Request.QueryString.Get("type") ?? "";
+        var type = Request.Params.Get("type") ?? "";
         var inttype = 0;
         int.TryParse(type, out inttype);
         if (!_types.Contains(inttype))
@@ -32,16 +32,19 @@ public partial class clothespress : System.Web.UI.Page
             if (inttype == 1)
             {
                 //衣服类型id
-                var typeid = Request.Params.Get("typeid") ?? "";
+                var typeid = Request.Params.Get("clothTypeId") ?? "";
                 //当前用户id
-                var userid = Request.Params.Get("userid") ?? "";
+                var userid = Request.Params.Get("userId") ?? "";
                 //衣服名称
                 var name = Request.Params.Get("name") ?? "";
-                Response.Write(JsonConvert.SerializeObject(ClothHelper.GetInfoByTypeOrName(Convert.ToInt32(typeid), name, Convert.ToInt32(userid))));
+
+                var id = Request.Params.Get("id") ?? "";
+
+                Response.Write(JsonConvert.SerializeObject(ClothHelper.GetInfoByTypeOrName(typeid, name,userid, id)));
                 return;
             }
             //编辑
-            if (inttype == 2)
+            if (inttype == 3)
             {
 
                 //类型主键id
@@ -65,7 +68,7 @@ public partial class clothespress : System.Web.UI.Page
                 return;
             }
             //新增
-            if (inttype == 3)
+            if (inttype == 2)
             {
               
                 var model = new Cloth();

@@ -14,7 +14,7 @@ public partial class aspx_link : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //type=1  get; type=2 add;type=3 edit
-        var type = Request.QueryString.Get("type") ?? "";
+        var type = Request.Params.Get("type") ?? "";
         var inttype = 0;
         int.TryParse(type, out inttype);
         if (!_types.Contains(inttype))
@@ -32,21 +32,21 @@ public partial class aspx_link : System.Web.UI.Page
             {
 
                 //当前用户id
-                var userid = Request.Params.Get("userid") ?? "";
+                var userid = Request.Params.Get("userId") ?? "";
                 Response.Write(JsonConvert.SerializeObject(collcloth.Thumb_up(Convert.ToInt32(userid))));
                 return;
             }
             //编辑
-            if (inttype == 2)
+            if (inttype == 3)
             {
                 return;
             }
             //新增
-            if (inttype == 3)
+            if (inttype == 2)
             {
 
                 var clothId = Request.Params.Get("clothId") ?? "";
-                var userid = Request.Params.Get("userid") ?? "";
+                var userid = Request.Params.Get("userId") ?? "";
                 Response.Write(JsonConvert.SerializeObject(collcloth.Thumb_insert(Convert.ToInt32(userid), Convert.ToInt32(clothId))));
                 return;
             }

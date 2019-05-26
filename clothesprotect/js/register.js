@@ -16,7 +16,7 @@
             data: formData,
             success: function (res) {
                 console.log(res);
-                const resJson = JSON.parse(res);
+                const resJson = typeof res == 'string' ? JSON.parse(res) : res;
                 if (resJson.Code + '' == '200') {
                     alert('注册成功，请回到登录页登录');
                     //window.location.href = './login.html';

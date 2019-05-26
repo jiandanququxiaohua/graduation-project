@@ -9,8 +9,7 @@ const MENUS = [
         title: '衣橱概览',
         key: 'chotherpressManage',
         href: './chotherpressManage.html'
-    },
-    {
+    }, {
         title: '我的衣橱',
         key: 'chothespress',
         href: './chothespress.html'
@@ -35,6 +34,7 @@ const MENUS = [
 
 const USER_KEY = 'USER_KEY';
 
+// 全局ajax配置
 $.ajaxSetup({
     dataType: "json",
     error: function (jqXHR, textStatus, errorThrown) {
@@ -68,8 +68,22 @@ $.ajaxSetup({
     cache: false
 });
 
+function getQueryString(name) {
+    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+    var r = window.location.search.substr(1).match(reg);
+
+    if (r != null) {
+        return unescape(r[2]);
+    }
+    return null;
+}
+
 const clothCommon = {
     init: function () {
+        var user = this.getUser();
+        if (!user) {
+            this.logout();
+        }
         $('.logout').eq(0).on('click', function () {
             clothCommon.logout();
         })
@@ -120,12 +134,19 @@ const clothCommon = {
         var user = this.getUser();
         $('.header-user').html(user ? user.userName : '');
     },
-    getClothType: function () {
+    getClothType: function (fn) {
         $.ajax({
             type: 'GET',
             url: 'aspx/clothType.aspx',
+            data: {
+                type: 1
+            },
             success: function (res) {
-
+                var resJson = typeof res == 'string' ? JSON.parse(res) : res;
+                if (resJson.Code + '' == '200') {
+                    var data = resJson.Data || [];
+                    fn && fn(data);
+                }
             }
         });
     }

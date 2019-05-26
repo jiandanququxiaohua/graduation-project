@@ -19,6 +19,9 @@
 
 .chart {
   height: 400px;
+  border: 1px solid #e3e3e3;
+  border-radius: 6px;
+  margin: 8px 16px;
 }
 
 .page-body > div {

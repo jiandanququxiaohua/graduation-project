@@ -33,7 +33,7 @@ public partial class share : System.Web.UI.Page
             {
 
                 //当前用户id
-                var userid = Request.Params.Get("userid") ?? "";
+                var userid = Request.Params.Get("userId") ?? "";
                 if (string.IsNullOrWhiteSpace(userid))
                 {
                     Response.Write(JsonConvert.SerializeObject(collcloth.share_all_get()));

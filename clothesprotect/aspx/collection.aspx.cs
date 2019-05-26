@@ -16,7 +16,7 @@ public partial class aspx_collection : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //type=1  get; type=2 add;type=3 edit
-        var type = Request.QueryString.Get("type") ?? "";
+        var type = Request.Params.Get("type") ?? "";
         var inttype = 0;
         int.TryParse(type, out inttype);
         if (!_types.Contains(inttype))
@@ -34,13 +34,13 @@ public partial class aspx_collection : System.Web.UI.Page
             {
 
                 //当前用户id
-                var userid = Request.Params.Get("userid") ?? "";
+                var userid = Request.Params.Get("userId") ?? "";
 
                 Response.Write(JsonConvert.SerializeObject(collcloth.collection_get(Convert.ToInt32(userid))));
                 return;
             }
             //编辑
-            if (inttype == 2)
+            if (inttype == 3)
             {
 
                 //类型主键id
@@ -52,13 +52,14 @@ public partial class aspx_collection : System.Web.UI.Page
                 return;
             }
             //新增
-            if (inttype == 3)
+            if (inttype == 2)
             {
 
                 var clothId = Request.Params.Get("clothId") ?? "";
+                var userId = Request.Params.Get("userId") ?? "";
                 var startTime = Request.Params.Get("startTime") ?? "";
                 var endTime = Request.Params.Get("endTime") ?? "";
-                Response.Write(JsonConvert.SerializeObject(collcloth.collection_insert(clothId, startTime, endTime)));
+                Response.Write(JsonConvert.SerializeObject(collcloth.collection_insert(clothId, startTime, endTime, userId)));
                 return;
             }
             //删除

@@ -36,7 +36,7 @@ const share = {
                 userId: user.id
             },
             success: function (res) {
-                var resJson = JSON.parse(res);
+                const resJson = typeof res == 'string' ? JSON.parse(res) : res;
                 if (resJson.Code + '' == '200') {
                     var data = resJson.Data || [];
 
@@ -54,7 +54,7 @@ const share = {
                 userId: user.id
             },
             success: function (res) {
-                var resJson = JSON.parse(res);
+                const resJson = typeof res == 'string' ? JSON.parse(res) : res;
                 if (resJson.Code + '' == '200') {
                     var data = resJson.Data || [];
 

@@ -3,26 +3,109 @@
  */
 
 const chotherpressManage = {
-  init: function () {
-    this.renderChart();
-  },
-  renderChart: function () {
-    var option = {
-      xAxis: {
-          type: 'category',
-          data: ['半裙', '包包', '开衫', '裤子', '内衣', '上装', '外套']
-      },
-      yAxis: {
-          type: 'value'
-      },
-      series: [{
-          data: [120, 200, 150, 80, 70, 110, 130],
-          type: 'bar'
-      }]
-    };
-    var container = $("#type-chart")[0];
-    const myChart = echarts.init(container);
-    myChart.clear();
-    myChart.setOption(option);
-  }
+    init: function () {
+        this.getData();
+    },
+    getData: function () {
+        var _this = this;
+        var user = clothCommon.getUser();
+
+        clothCommon.getClothType(function (data) {
+            _this.clothType = data;
+            $.ajax({
+                type: 'post',
+                url: 'aspx/clothespress.aspx',
+                data: {
+                    type: 1,
+                    userId: user.id + ''
+                },
+                success: function (res) {
+                    var resJson = typeof res == 'string' ? JSON.parse(res) : res;
+                    if (resJson.Code + '' == '200') {
+                        var data = resJson.Data || [];
+                        _this.renderBarChart(data);
+                        _this.renderPieChart(data);
+                    }
+                }
+            })
+        });
+    },
+    renderBarChart: function (data) {
+        var _this = this;
+        var xData = _this.clothType.map(function (item) { return item.type });
+        var dataNum = xData.map((item) => {
+            return data.reduce((a, b) => {
+                if (b.type == item) {
+                    a ++
+                }
+                return a;
+            }, 0)
+        });
+
+        var option = {
+            xAxis: {
+                type: 'category',
+                data: xData
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: dataNum,
+                type: 'bar'
+            }]
+        };
+        var container = $("#bar-chart")[0];
+        const myChart = echarts.init(container);
+        myChart.clear();
+        myChart.setOption(option);
+    },
+    renderPieChart: function (data) {
+        var _this = this;
+        var xData = _this.clothType.map(function (item) { return item.type });
+        var dataNum = xData.map((item) => {
+            var value = data.reduce((a, b) => {
+                if (b.type == item) {
+                    a++
+                }
+                return a;
+            }, 0);
+
+            return {
+                name: item,
+                value
+            }
+        });
+        var option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: xData
+            },
+            series: [
+                {
+                    name: '衣物数量占比',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '60%'],
+                    data: dataNum,
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        var container = $("#pie-chart")[0];
+        const myChart = echarts.init(container);
+        myChart.clear();
+        myChart.setOption(option);
+    }
 }
