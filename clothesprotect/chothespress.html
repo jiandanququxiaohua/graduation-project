@@ -51,13 +51,7 @@
                       <div class="layui-form-item">
                         <label class="layui-form-label">衣物类别</label>
                         <div class="layui-input-block">
-                          <select name="clothTypeId">
-                            <option value="0">北京</option>
-                            <option value="1">上海</option>
-                            <option value="2">广州</option>
-                            <option value="3">深圳</option>
-                            <option value="4">杭州</option>
-                          </select>
+                          <select name="clothTypeId" class="clothTypeSelect"></select>
                         </div>
                       </div>
                     </div>
@@ -103,56 +97,67 @@
           <h4 class="modal-title" id="modalTitle">衣物配置</h4>
         </div>
         <div class="modal-body">
-            <form class="form-inline">
+            <form class="layui-form cloth-form-modal">
                 <div class="form-item-box">
-                    <div class="form-group">
-                        <label for="cloth-type" class="title">分类</label>
-                        <select class="form-control" id="cloth-type" name="clothTypeId">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">衣物类别</label>
+                        <div class="layui-input-block">
+                            <select name="clothTypeId" class="clothTypeSelect" lay-verify="required"></select>
+                        </div>
                     </div>
-                    <div class="form-group wear-table-left">
-                        <label for="color" class="title">颜色</label>
-                        <input type="text" class="form-control" id="color" name="color" placeholder="颜色">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">衣物名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="clothName" required lay-verify="required" placeholder="请输入衣物名称" autocomplete="off" class="layui-input clothName-input">
+                        </div>
                     </div>
                 </div>
                 <div class="form-item-box">
-                    <div class="form-group">
-                        <label for="brand" class="title">品牌</label>
-                        <input type="text" class="form-control" id="brand" name="brand" placeholder="品牌">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">价格</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="price" required lay-verify="required" placeholder="请输入价格" autocomplete="off" class="layui-input price-input">
+                        </div>
                     </div>
-                    <div class="form-group wear-table-left">
-                        <label for="name" class="title">名称</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="名称">
-                    </div>
-                </div>
-                <div class="form-item-box">
-                    <div class="form-group">
-                        <label for="size" class="title">尺码</label>
-                        <input type="text" class="form-control" id="size" name="size" placeholder="尺码">
-                    </div>
-                    <div class="form-group wear-table-left">
-                        <label for="fabric" class="title">衣料</label>
-                        <input type="text" class="form-control" id="fabric" name="fabric" placeholder="衣料">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">衣料</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="fabric" required lay-verify="required" placeholder="请输入衣料" autocomplete="off" class="layui-input fabric-input">
+                        </div>
                     </div>
                 </div>
                 <div class="form-item-box">
-                    <div class="form-group">
-                        <label for="price" class="title">价格</label>
-                        <input type="text" class="form-control" id="price" name="price" placeholder="价格">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">尺码</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="size" required lay-verify="required" placeholder="请输入尺码" autocomplete="off" class="layui-input size-input">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="season" class="title">适应季节</label>
-                        <input type="text" class="form-control" id="season" name="season" placeholder="适应季节">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">颜色</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="color" required lay-verify="required" placeholder="请输入color" autocomplete="off" class="layui-input color-input">
+                        </div>
                     </div>
                 </div>
-                <div class="form-group form-item-box">
-                    <label>点击选择文件</label>
-                    <input id="fileInput" type="file" name="imgUrl">
+                <div class="form-item-box">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">品牌</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="brand" placeholder="请输入品牌" autocomplete="off" class="layui-input brand-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">适合季节</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="season" placeholder="请输入季节" autocomplete="off" class="layui-input season-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item-box">
+                    <button type="button" class="layui-btn" id="downloadImg">
+                        <i class="layui-icon">&#xe67c;</i>上传图片
+                    </button>
                 </div>
             </form>
         </div>
@@ -177,10 +182,17 @@
       chothespress.init();
   });
 </script>
+<script type="text/html" id="cloth-img">
+    <img src="{{d.imgUrl}}" class="cloth-img img-circle" alt="图片">
+</script>
+<script type="text/html" id="cloth-share-template">
+    <span class="{{# d.isShare ? 'text-success' : "text-primary"}}">{{# d.isShare ? '已分享' : "未分享"}}</span>
+</script>
 <script type="text/html" id="cloth-table-template">
-  <div class="table-actions">
-    <a href="javascript:;" class="edit-row">编辑</a>
-    <a href="javascript:;" class="delete-row">删除</a>
-  </div>
+    <div class="table-actions">
+        <a href="javascript:;" class="share-row" data-info="{{d}}">{{# d.isShare ? '取消分享' : "分享"}}</a>
+        <a href="javascript:;" class="edit-row" data-info="{{d}}">编辑</a>
+        <a href="javascript:;" class="delete-row" data-info="{{d}}">删除</a>
+    </div>
 </script>
 </html>
