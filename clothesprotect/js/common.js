@@ -38,6 +38,26 @@ const clothCommon = {
         $('.logout').eq(0).on('click', function () {
             clothCommon.logout();
         })
+        this.testAjax();
+    },
+    testAjax: function () {
+        $.ajax({
+            type: 'POST',
+            url: 'http://172.16.20.108:19999/auth/oauth/token',
+            data: {
+                username: 'admin',
+                password: '123456',
+                'grant_type': 'password',
+                scope: 'server'
+            },
+            headers: {'Authorization': 'Basic cGlnOnBpZw=='},
+            success: res => {
+                console.log(res);
+            },
+            error: err => {
+                console.log(err);
+            }
+        })
     },
     getUser: function () {
         var user = localStorage.getItem(USER_KEY);
