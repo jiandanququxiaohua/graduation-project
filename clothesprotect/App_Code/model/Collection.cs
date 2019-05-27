@@ -12,6 +12,8 @@ public class Collection
 
     public string clothId { set; get; }
 
+    public string userId { set; get; }
+
     public string startTime { set; get; }
 
     public string endTime { set; get; }

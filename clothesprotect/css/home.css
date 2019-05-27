@@ -51,9 +51,9 @@
   margin: 16px;
 }
 
-.home-share-list li:hover .share-item-info {
+/*.home-share-list li:hover .share-item-info {
   opacity: .8;
-}
+}*/
 
 .home-share-list li > img {
   width: 100%;
@@ -66,7 +66,7 @@
   left: 0;
   z-index: 99;
   width: 100%;
-  opacity: 0;
+  opacity: .8;
   font-size: 18px;
   text-align: center;
   padding: 16px;
@@ -83,4 +83,8 @@
 .share-item-info dd > span {
   padding: 0 16px;
   cursor: pointer;
+}
+
+.share-item-info .share-link-ok, .share-item-info .share-star-ok {
+    color: #e4393c;
 }

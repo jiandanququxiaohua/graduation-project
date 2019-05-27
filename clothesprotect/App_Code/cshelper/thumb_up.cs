@@ -37,7 +37,7 @@ public class thumb_up
         return result;
     }
 
-    public Result Thumb_up_delete(int userId)
+    public Result Thumb_up_delete(int id)
     {
         /// <summary>
         /// 登录
@@ -47,16 +47,9 @@ public class thumb_up
         DbHelperV2 dbhelperv2 = new DbHelperV2();
         var result = new Result<List<Link>>();
         //此处需优化，参数化处理
-        var sqltextFomat = "delete from [clothes].[dbo].[link] where userId='{0}'";
-        var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, userId));
-        if (dt == null || dt.Rows.Count == 0)
-        {
-            //Error todo  
-            result.Code = 403;
-            result.Message = "删除失败";
-            result.IsTrue = false;
-            return result;
-        }
+        var sqltextFomat = "delete from [clothes].[dbo].[link] where id='{0}'";
+        var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, id));
+
         result.Code = 200;
         result.Message = "成功！";
         result.IsTrue = true;
@@ -74,15 +67,8 @@ public class thumb_up
         var result = new Result<List<Link>>();
         //此处需优化，参数化处理
         var sqltextFomat = "insert into [clothes].[dbo].[link] (userId, clothId) values ('{0}', '{1}') ";
-        var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, userId, clothId));
-        if (dt == null || dt.Rows.Count == 0)
-        {
-            //Error todo  
-            result.Code = 403;
-            result.Message = "插入失败!";
-            result.IsTrue = false;
-            return result;
-        }
+        dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, userId, clothId));
+       
         result.Code = 200;
         result.Message = "成功！";
         result.IsTrue = true;

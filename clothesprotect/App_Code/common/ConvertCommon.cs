@@ -78,6 +78,7 @@ public static class ConvertCommon
             model.imgUrl = reurnSafeStr(row["imgUrl"]);
             model.createTime = reurnSafeStr(row["createTime"]);
             model.endTime = reurnSafeStr(row["endTime"]);
+            model.type = reurnSafeStr(row["type"]);
             model.id = Convert.ToInt32(row["id"]);
             result.Add(model);
         }
@@ -190,6 +191,7 @@ public static class ConvertCommon
         {
             var model = new Collection();
             model.clothId = reurnSafeStr(row["clothId"]);
+            model.userId = reurnSafeStr(row["userId"]);
             model.startTime = reurnSafeStr(row["startTime"]);
             model.endTime = reurnSafeStr(row["endTime"]);
             model.id = Convert.ToInt32(row["id"]);
@@ -211,6 +213,8 @@ public static class ConvertCommon
         {
             var model = new Share();
             model.clothId = reurnSafeStr(row["clothId"]);
+            model.clothName = reurnSafeStr(row["clothName"]);
+            model.clothImgUrl = reurnSafeStr(row["imgUrl"]);
             model.date = reurnSafeStr(row["date"]);
             model.describe = reurnSafeStr(row["describe"]);
             model.id = Convert.ToInt32(row["id"]);

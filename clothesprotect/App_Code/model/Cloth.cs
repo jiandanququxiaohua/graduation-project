@@ -29,4 +29,5 @@ public class Cloth
     public string imgUrl { set; get; }
     public string createTime { set; get; }
     public string endTime { set; get; }
+    public string type { set; get; }
 }

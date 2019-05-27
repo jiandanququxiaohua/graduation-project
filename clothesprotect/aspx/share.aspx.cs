@@ -15,7 +15,7 @@ public partial class share : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //type=1  get; type=2 add;type=3 edit
-        var type = Request.QueryString.Get("type") ?? "";
+        var type = Request.Params.Get("type") ?? "";
         var inttype = 0;
         int.TryParse(type, out inttype);
         if (!_types.Contains(inttype))
@@ -33,7 +33,7 @@ public partial class share : System.Web.UI.Page
             {
 
                 //当前用户id
-                var userid = Request.Params.Get("userid") ?? "";
+                var userid = Request.Params.Get("userId") ?? "";
                 if (string.IsNullOrWhiteSpace(userid))
                 {
                     Response.Write(JsonConvert.SerializeObject(collcloth.share_all_get()));
@@ -61,7 +61,8 @@ public partial class share : System.Web.UI.Page
                 var clothId = Request.Params.Get("clothId") ?? "";
                 var describe = Request.Params.Get("describe") ?? "";
                 var date = Request.Params.Get("date") ?? "";
-                Response.Write(JsonConvert.SerializeObject(collcloth.share_insert(clothId, describe, date)));
+                var belong = Request.Params.Get("belong") ?? "";
+                Response.Write(JsonConvert.SerializeObject(collcloth.share_insert(clothId, describe, belong, date)));
                 return;
             }
             //删除

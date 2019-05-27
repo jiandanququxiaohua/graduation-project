@@ -19,7 +19,7 @@ const closeLogin = {
             url: 'aspx/login.aspx',
             data: formData,
             success: function (res) {
-                const resJson = JSON.parse(res);
+                const resJson = typeof res == 'string' ? JSON.parse(res) : res;
                 if (resJson.Code + '' == '200') {
                     clothCommon.setUser(resJson.Data && resJson.Data[0]);
                     window.location.href = './home.html';

@@ -9,8 +9,7 @@ const MENUS = [
         title: '衣橱概览',
         key: 'chotherpressManage',
         href: './chotherpressManage.html'
-    },
-    {
+    }, {
         title: '我的衣橱',
         key: 'chothespress',
         href: './chothespress.html'
@@ -19,22 +18,72 @@ const MENUS = [
         key: 'wear',
         href: './wear.html'
     }, {
+        title: '收藏与分享',
+        key: 'share',
+        href: './share.html'
+    }, {
         title: '我的身材',
         key: 'figure',
         href: './figure.html'
     }, {
-        title: '收藏与分享',
-        key: 'share',
-        href: './share.html'
+        title: '个人信息',
+        key: 'user',
+        href: './user.html'
     }
 ];
 
 const USER_KEY = 'USER_KEY';
 
-console.log('df')
+// 全局ajax配置
+$.ajaxSetup({
+    dataType: "json",
+    error: function (jqXHR, textStatus, errorThrown) {
+        switch (jqXHR.status) {
+            case (500):
+                clothCommon.Message('danger', '服务错误');
+                break;
+            case (401):
+                clothCommon.Message('danger', '未登录');
+                break;
+            case (403):
+                clothCommon.Message('danger', '无权限执行此操作');
+                break;
+            case (408):
+                clothCommon.Message('danger', '请求超时');
+                break;
+            default:
+                clothCommon.Message('danger', '未知错误,请联系管理员');
+        }
+    },
+    complete: function (xhr) {
+        const res = xhr.responseJSON || {};
+        const status = xhr.status;
+        if (status == 200) {
+            if (res.Code + '' !== '200') {
+                clothCommon.Message('danger', '接口调用错误');
+            }
+        }
+
+    },
+    cache: false
+});
+
+function getQueryString(name) {
+    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+    var r = window.location.search.substr(1).match(reg);
+
+    if (r != null) {
+        return unescape(r[2]);
+    }
+    return null;
+}
 
 const clothCommon = {
     init: function () {
+        var user = this.getUser();
+        if (!user) {
+            this.logout();
+        }
         $('.logout').eq(0).on('click', function () {
             clothCommon.logout();
         })
@@ -58,6 +107,21 @@ const clothCommon = {
                 console.log(err);
             }
         })
+    },
+    Message: function (type = 'success', message = 'success') {
+        var len = $('.global-message').length;
+
+        var messageEle = `
+        <div class="alert alert-${type} alert-dismissible global-message" role="alert" data-num="${len}" style="display: none;">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          ${message}
+        </div>
+        `
+        $('body').append(messageEle);
+        $('.global-message').eq(len).fadeIn();
+        setTimeout(function () {
+            $('.global-message').eq(len).fadeOut();
+        }, 2000);
     },
     getUser: function () {
         var user = localStorage.getItem(USER_KEY);
@@ -90,15 +154,20 @@ const clothCommon = {
         var user = this.getUser();
         $('.header-user').html(user ? user.userName : '');
     },
-    getClothType: function () {
+    getClothType: function (fn) {
         $.ajax({
             type: 'GET',
             url: 'aspx/clothType.aspx',
-            success: function(res) {
-
+            data: {
+                type: 1
+            },
+            success: function (res) {
+                var resJson = typeof res == 'string' ? JSON.parse(res) : res;
+                if (resJson.Code + '' == '200') {
+                    var data = resJson.Data || [];
+                    fn && fn(data);
+                }
             }
         });
     }
 }
-
-console.log('clothCommon')

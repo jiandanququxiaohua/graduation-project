@@ -20,12 +20,12 @@ public class collection_cloth
     {
         var result = new Result<List<Collection>>();
         //此处需优化，参数化处理
-        var sqltextFomat = "select * from [clothes].[dbo].[collection] where userId='{0}'";
+        var sqltextFomat = "select a.id, a.userId, clothId, startTime, a.endTime, b.clothName, b.price, b.fabric from [clothes].[dbo].[collection] as a, [clothes].[dbo].[cloth] as b where a.clothId=b.id";
         var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, userId));
         if (dt == null || dt.Rows.Count == 0)
         {
             //Error todo  
-            result.Code = 403;
+            result.Code = 200;
             result.Message = "没有收藏记录！";
             result.IsTrue = false;
             result.Data = new List<Collection>();
@@ -85,12 +85,12 @@ public class collection_cloth
 
     }
 
-    public Result collection_insert(string clothId, string startTime, string endTime)
+    public Result collection_insert(string clothId, string startTime, string endTime, string userId)
     {
         var result = new Result<List<Collection>>();
         //此处需优化，参数化处理
-        var sqltextFomat = "insert into [clothes].[dbo].[collection] (clothId, startTime, endTime) values ('{0}', '{1}', '{2}')";
-        var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, clothId, startTime, endTime));
+        var sqltextFomat = "insert into [clothes].[dbo].[collection] (clothId, startTime, endTime, userId) values ('{0}', '{1}', '{2}', '{3}')";
+        var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, clothId, startTime, endTime, userId));
         if (dt == null || dt.Rows.Count == 0)
         {
             //Error todo  
