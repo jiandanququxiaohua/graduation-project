@@ -10,10 +10,13 @@
         var formData = $('#user-form').serialize();
         var submitBtn = $('.submit-btn');
         var params = {};
+        var user = clothCommon.getUser();
         formData.split('&').forEach(function (item) {
             item = item.split('=');
             params[item[0]] = item[1];
         });
+
+        params.userId = user.id;
 
         submitBtn.button('loading');
         $.ajax({
@@ -21,12 +24,9 @@
             url: 'aspx/user.aspx',
             data: params,
             success: function (res) {
-                console.log(res);
-                const resJson = JSON.parse(res);
+                const resJson = typeof res == 'string' ? JSON.parse(res) : res;
                 if (resJson.Code + '' == '200') {
-                    alert('保存成功');
-                } else {
-                    alert(resJson.Message)
+                    clothCommon.Message('success', '保存成功');
                 }
                 submitBtn.button('reset');
             }
@@ -35,6 +35,6 @@
         return false;
     },
     cancel: function () {
-        $('#figure-form').resize();
+        $('#user-form').resize();
     }
 }

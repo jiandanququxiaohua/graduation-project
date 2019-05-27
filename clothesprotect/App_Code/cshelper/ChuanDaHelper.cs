@@ -9,11 +9,11 @@ public static class ChuanDaHelper
 {
 
 
-    public static Result GetInfoByTypeOrName(int styeid, string name, int userid)
+    public static Result GetInfoByTypeOrName(int styeid, string name, int userId)
     {
         DbHelperV2 dbhelperv2 = new DbHelperV2();
         var result = new Result<List<Chuanda>>();
-        var whereexp = " userid=" + userid;
+        var whereexp = " userId=" + userId;
         if (styeid != -1)
         {
             whereexp = whereexp + " and styleId=" + styeid;

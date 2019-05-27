@@ -34,13 +34,13 @@ public partial class clothespress : System.Web.UI.Page
                 //衣服类型id
                 var typeid = Request.Params.Get("clothTypeId") ?? "";
                 //当前用户id
-                var userid = Request.Params.Get("userId") ?? "";
+                var userId = Request.Params.Get("userId") ?? "";
                 //衣服名称
                 var name = Request.Params.Get("name") ?? "";
 
                 var id = Request.Params.Get("id") ?? "";
 
-                Response.Write(JsonConvert.SerializeObject(ClothHelper.GetInfoByTypeOrName(typeid, name,userid, id)));
+                Response.Write(JsonConvert.SerializeObject(ClothHelper.GetInfoByTypeOrName(typeid, name,userId, id)));
                 return;
             }
             //编辑

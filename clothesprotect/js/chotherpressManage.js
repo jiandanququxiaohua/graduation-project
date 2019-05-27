@@ -43,6 +43,9 @@ const chotherpressManage = {
         });
 
         var option = {
+            title: {
+                text: '衣物分类数量柱状分析图'
+            },
             xAxis: {
                 type: 'category',
                 data: xData
@@ -77,6 +80,9 @@ const chotherpressManage = {
             }
         });
         var option = {
+            title: {
+                text: '衣物分类数量占比图'
+            },
             tooltip: {
                 trigger: 'item',
                 formatter: "{a} <br/>{b} : {c} ({d}%)"

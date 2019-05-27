@@ -8,6 +8,7 @@
   <title>衣橱管理</title>
   <!-- css -->
   <link rel="stylesheet" href="./static/js/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./static/js/layui-v2.4.5/css/layui.css">
   <link rel="stylesheet" href="./css/base.css">
   <link rel="stylesheet" href="./css/common.css">
   <link rel="stylesheet" href="./css/layout.css">  
@@ -18,6 +19,7 @@
   <!-- 基本所需库JS -->
   <script src="./static/js/jquery/jquery-3.3.1.js"></script>
   <script src="./static/js/bootstrap/js/bootstrap.min.js"></script>
+  <script src="./static/js/layui-v2.4.5/layui.js"></script>
 </head>
 <!-- 模板html: 包含一些基本样式及项目所需js -->
 
@@ -42,131 +44,47 @@
           <!-- 页面内容 -->
           <div class="content-body">
             <div class="choth-espress">
-              <ul class="choth-espress-box clear-float">
-                <li>
-                  <dl>
-                    <dt>
-                      <img src="./image/images-yi/banqun.png" alt="半裙" />
-                    </dt>
-                    <dd>半裙</dd>
-                  </dl>
-                </li>
-                <li>
-                  <dl>
-                    <dt>
-                      <img src="./image/images-yi/bao.png" alt="包包" />
-                    </dt>
-                    <dd>包包</dd>
-                  </dl>
-                </li>
-                <li>
-                  <dl>
-                    <dt>
-                      <img src="./image/images-yi/kaishan.png" alt="开衫" />
-                    </dt>
-                    <dd>开衫</dd>
-                  </dl>
-                </li>
-                <li>
-                  <dl>
-                    <dt>
-                      <img src="./image/images-yi/kuzi.png" alt="裤子" />
-                    </dt>
-                    <dd>裤子</dd>
-                  </dl>
-                </li>
-                <li>
-                  <dl>
-                    <dt>
-                      <img src="./image/images-yi/lianyi.png" alt="连衣裙" />
-                    </dt>
-                    <dd>连衣裙</dd>
-                  </dl>
-                </li>
-                <li>
-                  <dl>
-                    <dt>
-                      <img src="./image/images-yi/neiyi.png" alt="内衣" />
-                    </dt>
-                    <dd>内衣</dd>
-                  </dl>
-                </li>
-                <li>
-                  <dl>
-                    <dt>
-                      <img src="./image/images-yi/shangzhuang.png" alt="上装" />
-                    </dt>
-                    <dd>上装</dd>
-                  </dl>
-                </li>
-                <li>
-                  <dl>
-                    <dt>
-                      <img src="./image/images-yi/waitao.png" alt="外套" />
-                    </dt>
-                    <dd>外套</dd>
-                  </dl>
-                </li>
-                <li>
-                  <dl>
-                    <dt>
-                      <img src="./image/images-yi/weifen.png" alt="未分类" />
-                    </dt>
-                    <dd>未分类</dd>
-                  </dl>
-                </li>
-                <li>
-                  <dl>
-                    <dt>
-                      <img src="./image/images-yi/xiezi.png" alt="鞋子" />
-                    </dt>
-                    <dd>鞋子</dd>
-                  </dl>
-                </li>
-              </ul>
+              <div>
+                <form class="layui-form " action="">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">衣物类别</label>
+                        <div class="layui-input-block">
+                          <select name="clothTypeId">
+                            <option value="0">北京</option>
+                            <option value="1">上海</option>
+                            <option value="2">广州</option>
+                            <option value="3">深圳</option>
+                            <option value="4">杭州</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">衣物名称</label>
+                        <div class="layui-input-block">
+                          <input type="text" name="clothName" placeholder="请输入衣物名称" autocomplete="off" class="layui-input">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="layui-form-item">
+                        <div class="layui-input-block">
+                          <button class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+                          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
               <div class="choth-espress-table">
                 <div class="choth-espress-table-top clear-float">
-                  <div class="input-group left" style="width: 300px">
-                    <input type="text" class="form-control" placeholder="查询衣物">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;查询
-                      </button>
-                    </span>
-                  </div>
                   <div class="right"><button id="chothespress-add" type="button" class="btn btn-info">添加</button></div>
                 </div>
-                <table class="table table-striped table-bordered">
-                  <thead>
-                    <tr>
-                      <th>分类</th>
-                      <th>编号</th>
-                      <th>品牌</th>
-                      <th>名称</th>
-                      <th>尺码</th>
-                      <th>衣料</th>
-                      <th>价格</th>
-                      <th>操作</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>裙子</td>
-                      <td>001</td>
-                      <td>胡月明</td>
-                      <td>碎花裙</td>
-                      <td>39M</td>
-                      <td>100%纯羊毛</td>
-                      <td>190</td>
-                      <td>
-                        <div class="table-actions">
-                          <a href="javascript:;" class="edit-row">编辑</a>
-                          <a href="javascript:;" class="delete-row">删除</a>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <table class="table table-striped table-bordered" id="cloth-table" lay-filter="cloth-table"></table>
               </div>
             </div>
           </div>
@@ -254,10 +172,15 @@
   $().ready(function () {
       clothCommon.init();
       clothCommon.user();
-    clothCommon.navs('#navs', 'chothespress');
+      clothCommon.navs('#navs', 'chothespress');
 
-    chothespress.init();
+      chothespress.init();
   });
 </script>
-
+<script type="text/html" id="cloth-table-template">
+  <div class="table-actions">
+    <a href="javascript:;" class="edit-row">编辑</a>
+    <a href="javascript:;" class="delete-row">删除</a>
+  </div>
+</script>
 </html>

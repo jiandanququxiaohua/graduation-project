@@ -37,7 +37,7 @@ public partial class figure : System.Web.UI.Page
             {
 
                 //当前用户id
-                var userid = Request.Params.Get("userid") ?? "";
+                var userid = Request.Params.Get("userId") ?? "";
 
                 Response.Write(JsonConvert.SerializeObject(figureHelper.GetInfoById(Convert.ToInt32(userid))));
                 return;
@@ -50,7 +50,7 @@ public partial class figure : System.Web.UI.Page
                 var id = Request.Params.Get("id") ?? "";
                 var intid = Convert.ToInt32(id);
 
-                var userId = Request.QueryString.Get("userid") ?? "";
+                var userId = Request.QueryString.Get("userId") ?? "";
                 var weight = Request.QueryString.Get("weight") ?? "";
                 var stature = Request.QueryString.Get("stature") ?? "";
                 var chestSize = Request.QueryString.Get("chestSize") ?? "";
@@ -63,7 +63,7 @@ public partial class figure : System.Web.UI.Page
             //新增
             if (inttype == 3)
             {
-                var userId = Request.QueryString.Get("userid") ?? "";
+                var userId = Request.QueryString.Get("userId") ?? "";
                 var weight = Request.QueryString.Get("weight") ?? "";
                 var stature = Request.QueryString.Get("stature") ?? "";
                 var chestSize = Request.QueryString.Get("chestSize") ?? "";

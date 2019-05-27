@@ -34,9 +34,9 @@ public partial class aspx_collection : System.Web.UI.Page
             {
 
                 //当前用户id
-                var userid = Request.Params.Get("userId") ?? "";
+                var userId = Request.Params.Get("userId") ?? "";
 
-                Response.Write(JsonConvert.SerializeObject(collcloth.collection_get(Convert.ToInt32(userid))));
+                Response.Write(JsonConvert.SerializeObject(collcloth.collection_get(Convert.ToInt32(userId))));
                 return;
             }
             //编辑

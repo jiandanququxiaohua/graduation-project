@@ -12,6 +12,10 @@ public class Collection
 
     public string clothId { set; get; }
 
+    public string clothName { set; get; }
+
+    public string clothImgUrl { set; get; }
+
     public string userId { set; get; }
 
     public string startTime { set; get; }

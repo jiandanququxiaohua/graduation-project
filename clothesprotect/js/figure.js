@@ -10,14 +10,16 @@
         $(id).val(value);
     },
     get: function () {
+        var user = clothCommon.getUser();
         $.ajax({
             type: 'post',
             url: 'aspx/figure.aspx',
             data: {
-                type: 1
+                type: 1,
+                userId: user.id + ''
             },
             success: function (res) {
-                var resJson = JSON.parse(res);
+                var resJson = typeof res == 'string' ? JSON.parse(res) : res;
                 if (resJson.Code + '' == '200') {
                     var data = resJson.Data || null;
                     closeFigure.data = data;
@@ -54,12 +56,9 @@
             url: 'aspx/figure.aspx',
             data: params,
             success: function (res) {
-                console.log(res);
-                const resJson = JSON.parse(res);
+                const resJson = typeof res == 'string' ? JSON.parse(res) : res;
                 if (resJson.Code + '' == '200') {
-                    alert('保存成功');
-                } else {
-                    alert(resJson.Message)
+                    clothCommon.Message('success', '保存成功');
                 }
                 submitBtn.button('reset');
             }

@@ -9,14 +9,14 @@ public static class ClothHelper
 {
 
 
-    public static Result GetInfoByTypeOrName(string typeid, string name, string userid, string id)
+    public static Result GetInfoByTypeOrName(string typeid, string name, string userId, string id)
     {
         var result = new Result<List<Cloth>>();
         var whereexp = "a.id = " + id;
 
-        if (userid != "")
+        if (userId != "")
         {
-            whereexp = whereexp + " and a.userId=" + userid;
+            whereexp = whereexp + " and a.userId=" + userId;
         }
 
         if (typeid != "")

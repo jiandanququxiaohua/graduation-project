@@ -12,13 +12,13 @@ public static class figureHelper
 {
 
 
-    public static Result GetInfoById(int userid)
+    public static Result GetInfoById(int userId)
     {
         DbHelperV2 dbhelperv2 = new DbHelperV2();
         var result = new Result<Figure>();
         //此处需优化，参数化处理
         var sqltextFomat = "select * from [clothes].[dbo].[figure] where userId={0}";
-        var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, userid));
+        var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, userId));
         if (dt == null || dt.Rows.Count == 0)
         {
             //Error todo  
@@ -36,13 +36,13 @@ public static class figureHelper
         return result;
     }
 
-    public static Result AddFigure(int userid, string weight, string stature, string chestSize, string waistSize, string hiplineSize)
+    public static Result AddFigure(int userId, string weight, string stature, string chestSize, string waistSize, string hiplineSize)
     {
         var result = new Result();
         DbHelperV2 dbhelperv2 = new DbHelperV2();
         //此处需优化，参数化处理
         var sqltextFomat = "insert into [clothes].[dbo].[figure] (userId,weight,stature,chestSize,waistSize,hiplineSize) values ('{0}','{1}','{2}','{3}','{4}','{5}') ";
-        var sqlText = string.Format(sqltextFomat, userid, weight, stature, chestSize, waistSize, hiplineSize);
+        var sqlText = string.Format(sqltextFomat, userId, weight, stature, chestSize, waistSize, hiplineSize);
         dbhelperv2.ExecuteNonQuery(new List<string> { sqlText });
         result.Code = 200;
         result.Message = "成功！";
@@ -51,13 +51,13 @@ public static class figureHelper
     }
 
 
-    public static Result EditFigure(int userid, string weight, string stature, string chestSize, string waistSize, string hiplineSize, int id)
+    public static Result EditFigure(int userId, string weight, string stature, string chestSize, string waistSize, string hiplineSize, int id)
     {
         var result = new Result();
         DbHelperV2 dbhelperv2 = new DbHelperV2();
         //此处需优化，参数化处理
         var sqltextFomat = "update [clothes].[dbo].[figure] set userId='{0}',weight='{1}',stature='{2}',chestSize='{3}',waistSize='{4}',hiplineSize='{5}' where id={6} ";
-        var sqlText = string.Format(sqltextFomat, userid, weight, stature, chestSize, waistSize, hiplineSize, id);
+        var sqlText = string.Format(sqltextFomat, userId, weight, stature, chestSize, waistSize, hiplineSize, id);
         dbhelperv2.ExecuteNonQuery(new List<string> { sqlText });
         result.Code = 200;
         result.Message = "成功！";
