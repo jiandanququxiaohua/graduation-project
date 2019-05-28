@@ -66,3 +66,12 @@
 .form-item-box {
   margin-bottom: 16px;
 }
+
+.cloth-img {
+    height: 60px;
+    width: 60px;
+}
+
+.layui-table .layui-table-cell {
+    height: auto;
+}

@@ -43,7 +43,7 @@ public partial class share : System.Web.UI.Page
                 return;
             }
             //编辑
-            if (inttype == 2)
+            if (inttype == 3)
             {
 
                 //类型主键id
@@ -55,7 +55,7 @@ public partial class share : System.Web.UI.Page
                 return;
             }
             //新增
-            if (inttype == 3)
+            if (inttype == 2)
             {
 
                 var clothId = Request.Params.Get("clothId") ?? "";

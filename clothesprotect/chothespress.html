@@ -2,186 +2,175 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>衣橱管理</title>
-  <!-- css -->
-  <link rel="stylesheet" href="./static/js/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./static/js/layui-v2.4.5/css/layui.css">
-  <link rel="stylesheet" href="./css/base.css">
-  <link rel="stylesheet" href="./css/common.css">
-  <link rel="stylesheet" href="./css/layout.css">  
-  <!-- 当前页面样式 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>衣橱管理</title>
+    <!-- css -->
+    <link rel="stylesheet" href="./static/js/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/js/layui-v2.4.5/css/layui.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <!-- 当前页面样式 -->
 
-  <link rel="stylesheet" href="./css/chothespress.css">
+    <link rel="stylesheet" href="./css/chothespress.css">
 
-  <!-- 基本所需库JS -->
-  <script src="./static/js/jquery/jquery-3.3.1.js"></script>
-  <script src="./static/js/bootstrap/js/bootstrap.min.js"></script>
-  <script src="./static/js/layui-v2.4.5/layui.js"></script>
+    <!-- 基本所需库JS -->
+    <script src="./static/js/jquery/jquery-3.3.1.js"></script>
+    <script src="./static/js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./static/js/layui-v2.4.5/layui.js"></script>
 </head>
 <!-- 模板html: 包含一些基本样式及项目所需js -->
 
 <body>
-  <div id="app">
-    <div class="wrapper">
-      <header id="cloth-header" class="clear-float">
-        <div class="left cloth-header-logo">
-            <a href="./home.html"><span class="logo"></span></a>
-          <span>衣橱管理</span>
-        </div>
-        <div class="right cloth-header-user">
-          <span class="header-user"></span>&nbsp;|&nbsp;
-          <span class="logout">登出</span>
-        </div>
-      </header>
-      <div class="main">
-        <div id="navs">
-          <!-- 导航 -->
-        </div>
-        <div id="content">
-          <!-- 页面内容 -->
-          <div class="content-body">
-            <div class="choth-espress">
-              <div>
-                <form class="layui-form " action="">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="layui-form-item">
-                        <label class="layui-form-label">衣物类别</label>
-                        <div class="layui-input-block">
-                          <select name="clothTypeId" class="clothTypeSelect"></select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="layui-form-item">
-                        <label class="layui-form-label">衣物名称</label>
-                        <div class="layui-input-block">
-                          <input type="text" name="clothName" placeholder="请输入衣物名称" autocomplete="off" class="layui-input">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="layui-form-item">
-                        <div class="layui-input-block">
-                          <button class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
-                          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="choth-espress-table">
-                <div class="choth-espress-table-top clear-float">
-                  <div class="right"><button id="chothespress-add" type="button" class="btn btn-info">添加</button></div>
+    <div id="app">
+        <div class="wrapper">
+            <header id="cloth-header" class="clear-float">
+                <div class="left cloth-header-logo">
+                    <a href="./home.html"><span class="logo"></span></a>
+                    <span>衣橱管理</span>
                 </div>
-                <table class="table table-striped table-bordered" id="cloth-table" lay-filter="cloth-table"></table>
-              </div>
+                <div class="right cloth-header-user">
+                    <span class="header-user"></span>&nbsp;|&nbsp;
+                    <span class="logout">登出</span>
+                </div>
+            </header>
+            <div class="main">
+                <div id="navs">
+                    <!-- 导航 -->
+                </div>
+                <div id="content">
+                    <!-- 页面内容 -->
+                    <div class="content-body">
+                        <div class="choth-espress">
+                            <div>
+                                <form class="layui-form " action="">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">衣物类别</label>
+                                                <div class="layui-input-block">
+                                                    <select name="clothTypeId" class="clothTypeSelect"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">衣物名称</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="clothName" placeholder="请输入衣物名称" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="layui-form-item">
+                                                <div class="layui-input-block">
+                                                    <button class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+                                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="choth-espress-table">
+                                <div class="choth-espress-table-top clear-float">
+                                    <div class="right"><button id="chothespress-add" type="button" class="btn btn-info">添加</button></div>
+                                </div>
+                                <table class="table table-striped table-bordered" id="cloth-table" lay-filter="cloth-table"></table>
+                            </div>
+                        </div>
+                    </div>
+                    <footer id="footer">衣橱应用</footer>
+                </div>
             </div>
-          </div>
-          <footer id="footer">衣橱应用</footer>
         </div>
-      </div>
     </div>
-  </div>
-  <!-- Modal -->
-  <div class="modal fade" id="chothespressModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-              aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="modalTitle">衣物配置</h4>
-        </div>
-        <div class="modal-body">
-            <form class="layui-form cloth-form-modal">
-                <div class="form-item-box">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">衣物类别</label>
-                        <div class="layui-input-block">
-                            <select name="clothTypeId" class="clothTypeSelect" lay-verify="required"></select>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">衣物名称</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="clothName" required lay-verify="required" placeholder="请输入衣物名称" autocomplete="off" class="layui-input clothName-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-item-box">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">价格</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="price" required lay-verify="required" placeholder="请输入价格" autocomplete="off" class="layui-input price-input">
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">衣料</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="fabric" required lay-verify="required" placeholder="请输入衣料" autocomplete="off" class="layui-input fabric-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-item-box">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">尺码</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="size" required lay-verify="required" placeholder="请输入尺码" autocomplete="off" class="layui-input size-input">
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">颜色</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="color" required lay-verify="required" placeholder="请输入color" autocomplete="off" class="layui-input color-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-item-box">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">品牌</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="brand" placeholder="请输入品牌" autocomplete="off" class="layui-input brand-input">
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">适合季节</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="season" placeholder="请输入季节" autocomplete="off" class="layui-input season-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-item-box">
-                    <button type="button" class="layui-btn" id="downloadImg">
-                        <i class="layui-icon">&#xe67c;</i>上传图片
+    <!-- Modal -->
+    <div class="modal fade" id="chothespressModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                     </button>
+                    <h4 class="modal-title" id="modalTitle">衣物配置</h4>
                 </div>
-            </form>
+                <div class="modal-body">
+                    <form class="layui-form " id="cloth-form-modal">
+                        <div class="form-item-box">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">衣物类别</label>
+                                <div class="layui-input-block">
+                                    <select name="clothTypeId" class="clothTypeSelect" id="clothTypeSelect" lay-verify="required"></select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">衣物名称</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="clothName" required lay-verify="required" placeholder="请输入衣物名称" autocomplete="off" class="layui-input" id="clothName-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-item-box">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">价格</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="price" required lay-verify="required" placeholder="请输入价格" autocomplete="off" class="layui-input" id="price-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">衣料</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="fabric" required lay-verify="required" placeholder="请输入衣料" autocomplete="off" class="layui-input" id="fabric-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-item-box">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">尺码</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="size" required lay-verify="required" placeholder="请输入尺码" autocomplete="off" class="layui-input" id="size-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">颜色</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="color" required lay-verify="required" placeholder="请输入color" autocomplete="off" class="layui-input" id="color-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-item-box">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">品牌</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="brand" placeholder="请输入品牌" autocomplete="off" class="layui-input" id="brand-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">适合季节</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="season" placeholder="请输入季节" autocomplete="off" class="layui-input" id="season-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-item-box">
+                            <button type="button" class="layui-btn" id="uploadImg">
+                                <i class="layui-icon">&#xe67c;</i>上传图片
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default modal-ok" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary modal-cancel">确认</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-primary">确认</button>
-        </div>
-      </div>
     </div>
-  </div>
 </body>
-<!-- 项目基本JS -->
-<script src="./js/common.js"></script>
-<!-- 当前页所需JS -->
-<script src="./js/chothespress.js"></script>
-<script>
-  $().ready(function () {
-      clothCommon.init();
-      clothCommon.user();
-      clothCommon.navs('#navs', 'chothespress');
-
-      chothespress.init();
-  });
-</script>
+</html>
 <script type="text/html" id="cloth-img">
     <img src="{{d.imgUrl}}" class="cloth-img img-circle" alt="图片">
 </script>
@@ -195,4 +184,16 @@
         <a href="javascript:;" class="delete-row" data-info="{{d}}">删除</a>
     </div>
 </script>
-</html>
+<!-- 项目基本JS -->
+<script src="./js/common.js"></script>
+<!-- 当前页所需JS -->
+<script src="./js/chothespress.js"></script>
+<script>
+    $().ready(function () {
+        clothCommon.init();
+        clothCommon.user();
+        clothCommon.navs('#navs', 'chothespress');
+
+        chothespress.init();
+    });
+</script>

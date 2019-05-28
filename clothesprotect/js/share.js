@@ -103,13 +103,13 @@ const share = {
               data: data, //数据接口
               page: true, //开启分页
               cols: [[ //表头
-                {field: 'clothImgUrl', title: '图片', width: 100, template: '#cloth-img'},
+                  { field: 'clothImgUrl', title: '图片', width: 100, templet: '#cloth-img'},
                 {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'},
                 {field: 'clothName', title: '衣物名称'},
                 {field: 'date', title: '分享时间', sort: true},
                 {field: 'belong', title: '所属搭配方案',},
                 {field: 'describe', title: '描述'},
-                {field: 'action', title: '操作', template: '#share-table-template'}
+                  { field: 'action', title: '操作', templet: '#share-table-template'}
               ]]
             });
         });
@@ -124,12 +124,12 @@ const share = {
               data: data, //数据接口
               page: true, //开启分页
               cols: [[ //表头
-                {field: 'clothImgUrl', title: '图片', width: 100, template: '#cloth-img'},
+                  { field: 'clothImgUrl', title: '图片', width: 100, templet: '#cloth-img'},
                 {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'},
                 {field: 'clothName', title: '衣物名称'},
                 {field: 'startTime', title: '开始时间', sort: true},
                 {field: 'endTime', title: '结束时间', sort: true},
-                {field: 'action', title: '操作', template: '#collection-table-template'}
+                  { field: 'action', title: '操作', templet: '#collection-table-template'}
               ]]
             });
         });

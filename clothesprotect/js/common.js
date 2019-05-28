@@ -79,6 +79,7 @@ function getQueryString(name) {
 }
 
 const clothCommon = {
+    absImgUrl: '/image/img-clothes/',
     init: function () {
         var user = this.getUser();
         if (!user) {
@@ -86,26 +87,6 @@ const clothCommon = {
         }
         $('.logout').eq(0).on('click', function () {
             clothCommon.logout();
-        })
-        this.testAjax();
-    },
-    testAjax: function () {
-        $.ajax({
-            type: 'POST',
-            url: 'http://172.16.20.108:19999/auth/oauth/token',
-            data: {
-                username: 'admin',
-                password: '123456',
-                'grant_type': 'password',
-                scope: 'server'
-            },
-            headers: {'Authorization': 'Basic cGlnOnBpZw=='},
-            success: res => {
-                console.log(res);
-            },
-            error: err => {
-                console.log(err);
-            }
         })
     },
     Message: function (type = 'success', message = 'success') {
@@ -169,5 +150,8 @@ const clothCommon = {
                 }
             }
         });
+    },
+    resetForm: function (id) {
+        document.getElementById(id).reset();
     }
 }

@@ -12,11 +12,12 @@ public static class ClothHelper
     public static Result GetInfoByTypeOrName(string typeid, string name, string userId, string id)
     {
         var result = new Result<List<Cloth>>();
-        var whereexp = "a.id = " + id;
+        var whereexp = "a.userId = " + userId;
+        //var whereexp = "";
 
-        if (userId != "")
+        if (!string.IsNullOrEmpty(id))
         {
-            whereexp = whereexp + " and a.userId=" + userId;
+            whereexp = whereexp + " and a.id=" + userId;
         }
 
         if (typeid != "")
