@@ -75,3 +75,11 @@
 .layui-table .layui-table-cell {
     height: auto;
 }
+.layui-table-view .layui-table {
+    width: 100%;
+}
+
+.bold-span {
+    padding: 8px;
+    border-radius: 3px;
+}

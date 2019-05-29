@@ -164,8 +164,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default modal-ok" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary modal-cancel">确认</button>
+                    <button type="button" class="btn btn-default modal-cancel" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary modal-ok">确认</button>
                 </div>
             </div>
         </div>
@@ -175,16 +175,7 @@
 <script type="text/html" id="cloth-img">
     <img src="{{d.imgUrl}}" class="cloth-img img-circle" alt="图片">
 </script>
-<script type="text/html" id="cloth-share-template">
-    <span class="{{# d.isShare ? 'text-success' : "text-primary"}}">{{# d.isShare ? '已分享' : "未分享"}}</span>
-</script>
-<script type="text/html" id="cloth-table-template">
-    <div class="table-actions">
-        <a href="javascript:;" class="share-row" data-info="{{d}}">{{# d.isShare ? '取消分享' : "分享"}}</a>
-        <a href="javascript:;" class="edit-row" data-info="{{d}}">编辑</a>
-        <a href="javascript:;" class="delete-row" data-info="{{d}}">删除</a>
-    </div>
-</script>
+
 <!-- 项目基本JS -->
 <script src="./js/common.js"></script>
 <!-- 当前页所需JS -->

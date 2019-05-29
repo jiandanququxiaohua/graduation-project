@@ -192,6 +192,8 @@ public static class ConvertCommon
             var model = new Collection();
             model.clothId = reurnSafeStr(row["clothId"]);
             model.userId = reurnSafeStr(row["userId"]);
+            model.clothName = reurnSafeStr(row["clothName"]);
+            model.clothImgUrl = reurnSafeStr(row["imgUrl"]);
             model.startTime = reurnSafeStr(row["startTime"]);
             model.endTime = reurnSafeStr(row["endTime"]);
             model.id = Convert.ToInt32(row["id"]);

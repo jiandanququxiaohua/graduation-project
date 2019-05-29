@@ -1,10 +1,39 @@
-﻿const userFigure = {
+﻿const clothUser = {
     init: function () {
         this.onBtn();
+        this.get();
     },
     onBtn: function () {
         $('.submit-btn').on('click', this.save);
         $('.cancel-btn').on('click', this.cancel);
+    },
+    setItemValue: function (id, value) {
+        console.log(id, value);
+        $('#' + id).val(value);
+    },
+    get: function () {
+        var _this = this;
+        var user = clothCommon.getUser();
+        $.ajax({
+            type: 'post',
+            url: 'aspx/user.aspx',
+            data: {
+                userId: user.id,
+                type: 1
+            },
+            success: function (res) {
+                var resJson = typeof res == 'string' ? JSON.parse(res) : res;
+                if (resJson.Code + '' == '200') {
+                    var curr = resJson.Data ? resJson.Data[0] : null;
+                    clothUser.data = curr;
+                    if (!curr) return;
+                    for (var key in curr) {
+                        _this.setItemValue(key, curr[key]);
+                    }
+
+                }
+            }
+        })
     },
     save: function () {
         var formData = $('#user-form').serialize();
@@ -17,6 +46,7 @@
         });
 
         params.userId = user.id;
+        params.type = 2;
 
         submitBtn.button('loading');
         $.ajax({

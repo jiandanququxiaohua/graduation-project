@@ -20,7 +20,7 @@ public class collection_cloth
     {
         var result = new Result<List<Collection>>();
         //此处需优化，参数化处理
-        var sqltextFomat = "select a.id, a.userId, clothId, startTime, a.endTime, b.clothName, b.price, b.fabric from [clothes].[dbo].[collection] as a, [clothes].[dbo].[cloth] as b where a.clothId=b.id";
+        var sqltextFomat = "select a.id, a.userId, clothId, startTime, a.endTime, b.clothName, b.imgUrl from [clothes].[dbo].[collection] as a, [clothes].[dbo].[cloth] as b where a.clothId=b.id";
         var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, userId));
         if (dt == null || dt.Rows.Count == 0)
         {
@@ -45,14 +45,6 @@ public class collection_cloth
         //此处需优化，参数化处理
         var sqltextFomat = "delete from [clothes].[dbo].[collection] where id='{0}'";
         var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, id));
-        if (dt == null || dt.Rows.Count == 0)
-        {
-            //Error todo  
-            result.Code = 403;
-            result.Message = "删除失败！";
-            result.IsTrue = false;
-            return result;
-        }
         var collections = dt.ToCollections();
         result.Code = 200;
         result.Message = "成功！";
@@ -67,15 +59,7 @@ public class collection_cloth
         //此处需优化，参数化处理
         var sqltextFomat = "update [clothes].[dbo].[collection] set clothId='{0}' where id='{1}'";
         var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, clothId, id));
-        if (dt == null || dt.Rows.Count == 0)
-        {
-            //Error todo  
-            result.Code = 403;
-            result.Message = "更新失败！";
-            result.IsTrue = false;
-            result.Data = new List<Collection>();
-            return result;
-        }
+        
         var collections = dt.ToCollections();
         result.Code = 200;
         result.Message = "成功！";
@@ -91,15 +75,7 @@ public class collection_cloth
         //此处需优化，参数化处理
         var sqltextFomat = "insert into [clothes].[dbo].[collection] (clothId, startTime, endTime, userId) values ('{0}', '{1}', '{2}', '{3}')";
         var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, clothId, startTime, endTime, userId));
-        if (dt == null || dt.Rows.Count == 0)
-        {
-            //Error todo  
-            result.Code = 403;
-            result.Message = "插入失败！";
-            result.IsTrue = false;
-            result.Data = new List<Collection>();
-            return result;
-        }
+        
         result.Code = 200;
         result.Message = "成功！";
         result.IsTrue = true;

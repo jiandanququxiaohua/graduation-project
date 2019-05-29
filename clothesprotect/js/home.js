@@ -15,6 +15,10 @@ const home = {
             window.location.href = '/chothDetail.html?id=' + id;
         });
         $('#home-share').on('click', '.share-link', function () {
+            if (!user) {
+                clothCommon.Message('warning', '登录后才能点赞');
+                return;
+            }
             var id = $(this).data('id');
             var hasOk = $(this).hasClass('share-link-ok');
             var params = {};
@@ -57,7 +61,7 @@ const home = {
                 params.type = 2;
                 params.userId = user.id + '';
                 params.clothId = id;
-                params.startTime = Date.now() + '';
+                params.startTime = new Date().toLocaleString();
             }
 
             $.ajax({
@@ -110,15 +114,16 @@ const home = {
         var _this = this;
         // 获取当前用户点赞衣物、收藏
         var user = clothCommon.getUser();
-        var userId = user.id + '';
+        
         if (user) {
+            var userId = user.id + '';
             _this.getLinks(userId, () => {
                 _this.getCollections(userId, () => {
                     fn && fn();
                 });
             })            
         } else {
-            _this.shareList = [];
+            _this.linkList = [];
             _this.collectionList = [];
             fn && fn();
         }

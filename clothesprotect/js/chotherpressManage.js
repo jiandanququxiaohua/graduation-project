@@ -46,12 +46,25 @@ const chotherpressManage = {
             title: {
                 text: '衣物分类数量柱状分析图'
             },
+            toolbox: {
+                feature: {
+                    magicType: {
+                        type: ['stack', 'tiled']
+                    },
+                    saveAsImage: {
+                        pixelRatio: 2
+                    }
+                }
+            },
+            tooltip: {},
             xAxis: {
                 type: 'category',
-                data: xData
+                data: xData,
+                name: '分类'
             },
             yAxis: {
-                type: 'value'
+                type: 'value',
+                name: '数量'
             },
             series: [{
                 data: dataNum,
@@ -83,6 +96,13 @@ const chotherpressManage = {
             title: {
                 text: '衣物分类数量占比图'
             },
+            toolbox: {
+                feature: {
+                    saveAsImage: {
+                        pixelRatio: 2
+                    }
+                }
+            },
             tooltip: {
                 trigger: 'item',
                 formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -90,6 +110,7 @@ const chotherpressManage = {
             legend: {
                 orient: 'vertical',
                 left: 'left',
+                top: 60,
                 data: xData
             },
             series: [

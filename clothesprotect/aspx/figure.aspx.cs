@@ -19,7 +19,7 @@ public partial class figure : System.Web.UI.Page
     {
 
         //type=1  get; type=2 add;type=3 edit
-        var type = Request.QueryString.Get("type") ?? "";
+        var type = Request.Params.Get("type") ?? "";
         var inttype = 0;
         int.TryParse(type, out inttype);
         if (!_types.Contains(inttype))
@@ -39,7 +39,7 @@ public partial class figure : System.Web.UI.Page
                 //当前用户id
                 var userid = Request.Params.Get("userId") ?? "";
 
-                Response.Write(JsonConvert.SerializeObject(figureHelper.GetInfoById(Convert.ToInt32(userid))));
+                Response.Write(JsonConvert.SerializeObject(figureHelper.GetInfoById(userid)));
                 return;
             }
             //编辑
@@ -50,12 +50,12 @@ public partial class figure : System.Web.UI.Page
                 var id = Request.Params.Get("id") ?? "";
                 var intid = Convert.ToInt32(id);
 
-                var userId = Request.QueryString.Get("userId") ?? "";
-                var weight = Request.QueryString.Get("weight") ?? "";
-                var stature = Request.QueryString.Get("stature") ?? "";
-                var chestSize = Request.QueryString.Get("chestSize") ?? "";
-                var waistSize = Request.QueryString.Get("waistSize") ?? "";
-                var hiplineSize = Request.QueryString.Get("hiplineSize") ?? "";
+                var userId = Request.Params.Get("userId") ?? "";
+                var weight = Request.Params.Get("weight") ?? "";
+                var stature = Request.Params.Get("stature") ?? "";
+                var chestSize = Request.Params.Get("chestSize") ?? "";
+                var waistSize = Request.Params.Get("waistSize") ?? "";
+                var hiplineSize = Request.Params.Get("hiplineSize") ?? "";
 
                 Response.Write(JsonConvert.SerializeObject(figureHelper.EditFigure(Convert.ToInt32(userId), weight, stature, chestSize, waistSize, hiplineSize, intid)));
                 return;
@@ -63,14 +63,14 @@ public partial class figure : System.Web.UI.Page
             //新增
             if (inttype == 3)
             {
-                var userId = Request.QueryString.Get("userId") ?? "";
-                var weight = Request.QueryString.Get("weight") ?? "";
-                var stature = Request.QueryString.Get("stature") ?? "";
-                var chestSize = Request.QueryString.Get("chestSize") ?? "";
-                var waistSize = Request.QueryString.Get("waistSize") ?? "";
-                var hiplineSize = Request.QueryString.Get("hiplineSize") ?? "";
+                var userId = Request.Params.Get("userId") ?? "";
+                var weight = Request.Params.Get("weight") ?? "";
+                var stature = Request.Params.Get("stature") ?? "";
+                var chestSize = Request.Params.Get("chestSize") ?? "";
+                var waistSize = Request.Params.Get("waistSize") ?? "";
+                var hiplineSize = Request.Params.Get("hiplineSize") ?? "";
 
-                Response.Write(JsonConvert.SerializeObject(figureHelper.AddFigure(Convert.ToInt32(userId), weight, stature, chestSize, waistSize, hiplineSize)));
+                Response.Write(JsonConvert.SerializeObject(figureHelper.AddFigure(userId, weight, stature, chestSize, waistSize, hiplineSize)));
                 return;
             }
             //删除

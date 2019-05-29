@@ -82,7 +82,9 @@ const clothCommon = {
     absImgUrl: '/image/img-clothes/',
     init: function () {
         var user = this.getUser();
-        if (!user) {
+        var path = window.location.pathname;
+        //console.log(path, user);
+        if (!user && (path != '/' && path != '/Default.aspx')) {
             this.logout();
         }
         $('.logout').eq(0).on('click', function () {

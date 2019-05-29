@@ -3,6 +3,14 @@
 const chothDetail = {
     init: function () {
         this.getData();
+        this.on();
+    },
+    on: function () {
+        var user = clothCommon.getUser();
+        $('.toHome').on('click', function () {
+            var path = user ? './home.html' : './Default.aspx';
+            window.location.href = path;
+        })
     },
     getData: function () {
         var _this = this;
@@ -32,9 +40,9 @@ const chothDetail = {
             <li><span class="cloth-title">类型名称：</span>${props.clothTypeName}</li>
             <li><span class="cloth-title">颜色：</span>${props.color}</li>
             <li><span class="cloth-title">品牌：</span>${props.brand}</li>
-            <li><span class="cloth-title">尺码：</span>${props.size}</li>
+            <li><span class="cloth-title">尺码：</span><span class="bold-span bg-success">${props.size}</span></li>
             <li><span class="cloth-title">衣料：</span>${props.fabric}</li>
-            <li><span class="cloth-title text-danger">价格：</span>${props.price}</li>
+            <li><span class="cloth-title">价格：</span><span class="bold-span bg-danger">${props.price}</span></li>
             <li><span class="cloth-title">适应季节：</span>${props.season}</li>
         `;
         $('#imgsrc').attr('src', imgUrl);

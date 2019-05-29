@@ -39,11 +39,11 @@ public class share_cloth
         return result;
     }
 
-    public Result share_current_get(int userId)
+    public Result share_current_get(string userId)
     {
         var result = new Result<List<Share>>();
         //此处需优化，参数化处理
-        var sqltextFomat = "select a.id, clothId, a.userId date,belong, describe, b.clothName from [clothes].[dbo].[share] as a, [clothes].[dbo].[cloth] as b where a.clothId=b.id and a.userId='{0}'";
+        var sqltextFomat = "select a.id, clothId, a.userId, date, belong, describe, b.clothName, b.imgUrl from [clothes].[dbo].[share] as a, [clothes].[dbo].[cloth] as b where a.clothId=b.id and a.userId='{0}'";
         var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, userId));
         if (dt == null || dt.Rows.Count == 0)
         {
@@ -67,14 +67,7 @@ public class share_cloth
         //此处需优化，参数化处理
         var sqltextFomat = "delete from [clothes].[dbo].[share] where id='{0}'";
         var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, id));
-        if (dt == null || dt.Rows.Count == 0)
-        {
-            //Error todo  
-            result.Code = 403;
-            result.Message = "删除失败！";
-            result.IsTrue = false;
-            return result;
-        }
+        
         var shares = dt.ToShares();
         result.Code = 200;
         result.Message = "成功！";
@@ -89,15 +82,7 @@ public class share_cloth
         //此处需优化，参数化处理
         var sqltextFomat = "update [clothes].[dbo].[share] set clothId='{0}', describe='{1}' where id='{2}'";
         var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, clothId, describe, id));
-        if (dt == null || dt.Rows.Count == 0)
-        {
-            //Error todo  
-            result.Code = 403;
-            result.Message = "更新失败！";
-            result.IsTrue = false;
-            result.Data = new List<Share>();
-            return result;
-        }
+        
         var shares = dt.ToShares();
         result.Code = 200;
         result.Message = "成功！";
@@ -106,20 +91,13 @@ public class share_cloth
         return result;
 
     }
-    public Result share_insert(string clothId, string describe, string belong, string date)
+    public Result share_insert(string clothId, string userId, string describe, string belong, string date)
     {
         var result = new Result<List<Share>>();
         //此处需优化，参数化处理
-        var sqltextFomat = "insert into [clothes].[dbo].[share] (clothId, describe, belong, date) values ('{0}', '{1}', '{2}', '{3}') ";
-        var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, clothId, describe, date));
-        //if (dt == null || dt.Rows.Count == 0)
-        //{
-        //    //Error todo  
-        //    result.Code = 403;
-        //    result.Message = "插入失败！";
-        //    result.IsTrue = false;
-        //    return result;
-        //}
+        var sqltextFomat = "insert into [clothes].[dbo].[share] (clothId, userId, describe, date, belong) values ('{0}', '{1}', '{2}', '{3}', '{4}') ";
+        var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, clothId, userId, describe, date, belong));
+        
         result.Code = 200;
         result.Message = "成功！";
         result.IsTrue = true;

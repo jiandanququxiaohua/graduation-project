@@ -6,3 +6,8 @@
   margin-bottom: 16px;
 }
 
+#preview {
+    margin-left: 30px;
+    width: 100px;
+    height: 100px;
+}

@@ -39,7 +39,7 @@ public partial class share : System.Web.UI.Page
                     Response.Write(JsonConvert.SerializeObject(collcloth.share_all_get()));
                     return;
                 }
-                Response.Write(JsonConvert.SerializeObject(collcloth.share_current_get(Convert.ToInt32(userid))));
+                Response.Write(JsonConvert.SerializeObject(collcloth.share_current_get(userid)));
                 return;
             }
             //编辑
@@ -59,10 +59,11 @@ public partial class share : System.Web.UI.Page
             {
 
                 var clothId = Request.Params.Get("clothId") ?? "";
+                var userId = Request.Params.Get("userId") ?? "";
                 var describe = Request.Params.Get("describe") ?? "";
                 var date = Request.Params.Get("date") ?? "";
                 var belong = Request.Params.Get("belong") ?? "";
-                Response.Write(JsonConvert.SerializeObject(collcloth.share_insert(clothId, describe, belong, date)));
+                Response.Write(JsonConvert.SerializeObject(collcloth.share_insert(clothId, userId, describe, belong, date)));
                 return;
             }
             //删除

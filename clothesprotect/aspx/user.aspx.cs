@@ -14,21 +14,38 @@ using Newtonsoft.Json;
 public partial class user : System.Web.UI.Page
 {
     DbHelperV2 dbhelperv2 = new DbHelperV2();
+
+    int[] _types = new int[] { 1, 2 };
     protected void Page_Load(object sender, EventArgs e)
     {
-        var userId = Request.QueryString.Get("id") ?? "";
-        var loginName = Request.QueryString.Get("name") ?? "";
-        var loginPsw = Request.QueryString.Get("psw") ?? "";
-        var alias = Request.QueryString.Get("alias") ?? "";
-        var age = Request.QueryString.Get("age") ?? "";
-
-        //post取参
-        //var cc=Request.Params.Get("name") ?? "";
+        var type = Request.Params.Get("type") ?? "";
+        var inttype = 0;
+        int.TryParse(type, out inttype);
+        if (!_types.Contains(inttype))
+        {
+            //type值不合法
+            Response.Write(JsonConvert.SerializeObject(new Result { Code = 500, IsTrue = false, Message = "type只能赋值1、2、3、4" }));
+            return;
+        }
         try
         {
-            //注册
-            Response.Write(JsonConvert.SerializeObject(RegisterClothes(loginName, loginPsw, alias, age, userId)));
-            return;
+            //查找
+            if (inttype == 1)
+            {
+                var userId = Request.Params.Get("userId") ?? "";
+                Response.Write(JsonConvert.SerializeObject(getUser(userId)));
+                return;
+            }
+            if (inttype == 2)
+            {
+                var userId = Request.Params.Get("userId") ?? "";
+                var loginName = Request.Params.Get("name") ?? "";
+                var loginPsw = Request.Params.Get("psw") ?? "";
+                var alias = Request.Params.Get("alias") ?? "";
+                var age = Request.Params.Get("age") ?? "";
+                Response.Write(JsonConvert.SerializeObject(updateUser(loginName, loginPsw, alias, age, userId)));
+                return;
+            }
         }
         catch (Exception ex)
         {
@@ -44,7 +61,7 @@ public partial class user : System.Web.UI.Page
     /// <param name="alias"></param>
     /// <param name="age"></param>
     /// <returns></returns>
-    private Result RegisterClothes(string loginName, string loginPsw, string alias, string age, string id)
+    private Result updateUser(string loginName, string loginPsw, string alias, string age, string id)
     {
         var result = new Result<List<User>>();
         //此处需优化，参数化处理
@@ -53,6 +70,29 @@ public partial class user : System.Web.UI.Page
         dbhelperv2.ExecuteNonQuery(new List<string> { sqlText });
         result.Code = 200;
         result.Message = "成功！";
+        result.IsTrue = true;
+        return result;
+    }
+
+    private Result getUser(string id)
+    {
+        var result = new Result<List<User>>();
+        //此处需优化，参数化处理
+        var sqltextFomat = "select * from [clothes].[dbo].[user] where id={0}";
+        var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, id));
+        if (dt == null || dt.Rows.Count == 0)
+        {
+            //Error todo  
+            result.Code = 403;
+            result.Message = "查无此人！";
+            result.IsTrue = false;
+            result.Data = new List<User>();
+            return result;
+        }
+        var users = dt.ToUsers();
+        result.Code = 200;
+        result.Message = "成功！";
+        result.Data = users;
         result.IsTrue = true;
         return result;
     }

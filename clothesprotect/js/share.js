@@ -4,8 +4,10 @@
 
 const share = {
     init: function () {
-        share.tabs();
+        this.tabs();
         this.onEvent();
+        this.getShare();
+        this.getCollection();
     },
     tabs: function () {
         var _this = this;
@@ -17,9 +19,9 @@ const share = {
         $('.share-tabs li').on('click', function () {
             var index = $(".share-tabs li").index(this);
             if (index) {
-                _this.getCollection();
+                _this.collectionTable.reload('collection');
             } else {
-                _this.getShare();
+                _this.shareTable.reload('share');
             }
             $('.share-tabs li').removeClass('active');
             $('.share-table').hide('slow');
@@ -28,28 +30,29 @@ const share = {
         });
     },
     onEvent: function () {
-        $('.share-action').on('click', function () {
+        var _this = this;
+        $('.share-table').on('click', '.share-action', function () {
             const id = $(this).data('id');
             $.ajax({
                 type: 'POST',
                 url: 'aspx/share.aspx',
-                data: {id: id},
+                data: { id: id, type: 4 },
                 success: function (res) {
                     if (res.Code + '' == '200') {
-                        this.getShare();
+                        _this.getShare();
                     }
                 }
             })
         });
-        $('.collection-action').on('click', function () {
+        $('.share-table').on('click', '.collection-action', function () {
             const id = $(this).data('id');
             $.ajax({
                 type: 'POST',
-                url: 'aspx/collectoin.aspx',
-                data: {id: id},
+                url: 'aspx/collection.aspx',
+                data: { id: id, type: 4 },
                 success: function (res) {
                     if (res.Code + '' == '200') {
-                        this.getCollection();
+                        _this.getCollection();
                     }
                 }
             })
@@ -60,7 +63,7 @@ const share = {
         var user = clothCommon.getUser();
         $.ajax({
             type: 'POST',
-            url: 'apsx/share.aspx',
+            url: 'aspx/share.aspx',
             data: {
                 type: 1,
                 userId: user.id
@@ -79,7 +82,7 @@ const share = {
         var user = clothCommon.getUser();
         $.ajax({
             type: 'POST',
-            url: 'apsx/collection.aspx',
+            url: 'aspx/collection.aspx',
             data: {
                 type: 1,
                 userId: user.id
@@ -94,43 +97,45 @@ const share = {
         });
     },
     renderShare: function (data) {
-        layui.use('table', function(){
-            var table = layui.table;
+        var _this = this;
+        layui.use('table', function () {
+            _this.shareTable = layui.table;
             //第一个实例
-            table.render({
-              elem: '#share-table',
-              height: 400,
-              data: data, //数据接口
-              page: true, //开启分页
-              cols: [[ //表头
-                  { field: 'clothImgUrl', title: '图片', width: 100, templet: '#cloth-img'},
-                {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'},
-                {field: 'clothName', title: '衣物名称'},
-                {field: 'date', title: '分享时间', sort: true},
-                {field: 'belong', title: '所属搭配方案',},
-                {field: 'describe', title: '描述'},
-                  { field: 'action', title: '操作', templet: '#share-table-template'}
-              ]]
+            _this.shareTable .render({
+                elem: '#share-table',
+                height: 500,
+                data: data, //数据接口
+                page: true, //开启分页
+                cols: [[ //表头
+                    { field: 'clothImgUrl', title: '图片', templet: '#cloth-img' },
+                    { field: 'id', title: 'ID', sort: true },
+                    { field: 'clothName', title: '衣物名称' },
+                    { field: 'date', title: '分享时间', sort: true },
+                    { field: 'belong', title: '所属搭配方案', },
+                    { field: 'describe', title: '描述' },
+                    { field: 'action', title: '操作', templet: '#share-table-template' }
+                ]]
             });
         });
     },
     renderCollection: function (data) {
-        layui.use('table', function(){
-            var table = layui.table;
+        var _this = this;
+        layui.use('table', function () {
+            _this.collectionTable = layui.table;
             //第一个实例
-            table.render({
-              elem: '#collection-table',
-              height: 400,
-              data: data, //数据接口
-              page: true, //开启分页
-              cols: [[ //表头
-                  { field: 'clothImgUrl', title: '图片', width: 100, templet: '#cloth-img'},
-                {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'},
-                {field: 'clothName', title: '衣物名称'},
-                {field: 'startTime', title: '开始时间', sort: true},
-                {field: 'endTime', title: '结束时间', sort: true},
-                  { field: 'action', title: '操作', templet: '#collection-table-template'}
-              ]]
+            _this.collectionTable .render({
+                elem: '#collection-table',
+                height: 500,
+                data: data, //数据接口
+                page: true, //开启分页
+                cols: [[ //表头
+                    { field: 'clothImgUrl', title: '图片', templet: '#cloth-img' },
+                    { field: 'id', title: 'ID', sort: true },
+                    { field: 'clothName', title: '衣物名称' },
+                    { field: 'startTime', title: '开始时间', sort: true },
+                    { field: 'endTime', title: '结束时间', sort: true },
+                    { field: 'action', title: '操作', templet: '#collection-table-template' }
+                ]]
             });
         });
     }

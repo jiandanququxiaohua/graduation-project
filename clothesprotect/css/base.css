@@ -101,10 +101,10 @@ html, body, #app, .wrapper {
 /* message */
 
 .global-message {
-    position: absolute;
+    position: fixed;
     max-width: 300px;
     top: 60px;
     left: 50%;
     z-index: 9999;
-    transform: translateX(-150px);
+    transform: translateX(-100px);
 }

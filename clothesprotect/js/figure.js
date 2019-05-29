@@ -1,15 +1,18 @@
 ﻿const closeFigure = {
     init: function () {
         this.onBtn();
+        this.get();
     },
     onBtn: function () {
         $('.figure-submit').on('click', this.save);
         $('.cancel-btn').on('click', this.cancel);
     },
     setItemValue: function (id, value) {
-        $(id).val(value);
+        console.log(id, value);
+        $('#' + id).val(value);
     },
     get: function () {
+        var _this = this;
         var user = clothCommon.getUser();
         $.ajax({
             type: 'post',
@@ -21,11 +24,11 @@
             success: function (res) {
                 var resJson = typeof res == 'string' ? JSON.parse(res) : res;
                 if (resJson.Code + '' == '200') {
-                    var data = resJson.Data || null;
-                    closeFigure.data = data;
-                    if (!data) return;
-                    for (var key in data) {
-                        closeFigure.setItemValue(key, data[key]);
+                    var curr = resJson.Data || null;
+                    closeFigure.data = curr;
+                    if (!curr) return;
+                    for (var key in curr) {
+                        _this.setItemValue(key, curr[key]);
                     }
                     
                 }
@@ -33,6 +36,7 @@
         });
     },
     save: function () {
+        var user = clothCommon.getUser();
         var initData = closeFigure.data;
         var formData = $('#figure-form').serialize();
         var submitBtn = $('.figure-submit');
@@ -45,9 +49,10 @@
         if (initData) {
             params.type = 2;
             params.id = initData.id;
-            params.userId = initData.userId;
+            params.userId = user.id;
         } else {
             params.type = 3;
+            params.userId = user.id;
         }
 
         submitBtn.button('loading');

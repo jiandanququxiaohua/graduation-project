@@ -12,12 +12,16 @@ public static class ClothHelper
     public static Result GetInfoByTypeOrName(string typeid, string name, string userId, string id)
     {
         var result = new Result<List<Cloth>>();
-        var whereexp = "a.userId = " + userId;
-        //var whereexp = "";
+        var whereexp = "a.clothTypeId = b.id";
+
+        if (!string.IsNullOrEmpty(userId))
+        {
+            whereexp = whereexp + " and a.userId=" + userId;
+        }
 
         if (!string.IsNullOrEmpty(id))
         {
-            whereexp = whereexp + " and a.id=" + userId;
+            whereexp = whereexp + " and a.id=" + id;
         }
 
         if (typeid != "")
@@ -30,7 +34,7 @@ public static class ClothHelper
         }
 
         //此处需优化，参数化处理
-        var sqltextFomat = "select a.*, b.type from [clothes].[dbo].[cloth] as a, [clothes].[dbo].[clothType] as b where {0} and a.clothTypeId = b.id";
+        var sqltextFomat = "select a.*, b.type from [clothes].[dbo].[cloth] as a, [clothes].[dbo].[clothType] as b where {0}";
         DbHelperV2 dbhelperv2 = new DbHelperV2();
         var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, whereexp));
         if (dt == null || dt.Rows.Count == 0)

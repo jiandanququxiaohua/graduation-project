@@ -34,11 +34,12 @@ const chothespress = {
             $('#chothespressModal').modal('show');
             clothCommon.resetForm("cloth-form-modal");
         });
-        $('.share-row').on('click', function () {
-            var record = $(this).data('info') || {};
+        $('.choth-espress-table').on('click', '.share-row', function () {
+            var id = $(this).data('id');
+            var record = _this.data.find(item => item.id + '' == id);
             var params = {};
             var user = clothCommon.getUser();
-            
+
             if (!record.isShare) {
                 params.userId = user.id;
                 params.clothId = record.id;
@@ -68,10 +69,12 @@ const chothespress = {
                     }
                 });
             }
-            
+
         });
-        $('.edit-row').on('click', function () {
-            var record = $(this).data('info') || {};
+        $('.choth-espress-table').on('click', '.edit-row', function () {
+            var id = $(this).data('id');
+            var record = _this.data.find(item => item.id + '' == id);
+            console.log(record);
             $('#chothespressModal').modal('show');
             clothCommon.resetForm("cloth-form-modal");
 
@@ -85,8 +88,9 @@ const chothespress = {
             $('#color-input').val(record.color);
             _this.editData = record || {};
         });
-        $('.delete-row').on('click', function () {
-            var record = $(this).data('info');
+        $('.choth-espress-table').on('click', '.delete-row', function () {
+            var id = $(this).data('id');
+            var record = _this.data.find(item => item.id + '' == id);
             $.ajax({
                 type: 'POST',
                 url: 'aspx/clothespress.aspx',
@@ -134,7 +138,7 @@ const chothespress = {
                     }
                 }
             })
-            
+
         });
         $('.modal-cancel').on('click', function () {
             clothCommon.resetForm("cloth-form-modal");
@@ -142,10 +146,11 @@ const chothespress = {
     },
     getClothType: function () {
         clothCommon.getClothType(function (data) {
+            const defaultoption = "<option value=''>全部</option>";
             var options = data.map(item => {
                 return `<option value="${item.id}">${item.type}</option>`;
             }).join("");
-            $('clothTypeSelect').html(options);
+            $('.clothTypeSelect').html(defaultoption + options);
         })
     },
     search: function () {
@@ -182,6 +187,7 @@ const chothespress = {
                     }
                     return item;
                 })
+                _this.data = newList;
                 _this.renderTable(newList);
             }
         })
@@ -226,7 +232,7 @@ const chothespress = {
                 page: true, //开启分页
                 cols: [[ //表头
                     { field: 'imgUrl', title: '图片', width: 100, templet: '#cloth-img' },
-                    { field: 'id', title: 'ID', width: 80, sort: true},
+                    { field: 'id', title: 'ID', width: 80, sort: true },
                     { field: 'clothName', title: '衣物名称' },
                     { field: 'clothTypeName', title: '衣物类别', sort: true },
                     { field: 'price', title: '价格', },
@@ -236,8 +242,20 @@ const chothespress = {
                     { field: 'size', title: '尺码' },
                     { field: 'color', title: '颜色' },
                     { field: 'createTime', title: '创建时间' },
-                    { field: 'isShare', title: '是否分享', templet: '#cloth-share-template' },
-                    { field: 'action', title: '操作', templet: '#cloth-table-template' }
+                    {
+                        field: 'isShare', title: '是否分享', templet: d => {
+                            return `<span class="${d.isShare ? 'text-success' : "text-primary"}">${d.isShare ? '已分享' : "未分享"}</span>`;
+                        }
+                    },
+                    {
+                        field: 'action', title: '操作', width: 200, templet: d => {
+                            return `<div class="table-actions">
+                                <a href="javascript:;" class="share-row" data-id="${d.id}">${d.isShare ? '取消分享' : "分享"}</a>
+                                <a href="javascript:;" class="edit-row" data-id="${d.id}">编辑</a>
+                                <a href="javascript:;" class="delete-row" data-id="${d.id}">删除</a>
+                            </div>`;
+                        }
+                    }
                 ]]
             });
         });

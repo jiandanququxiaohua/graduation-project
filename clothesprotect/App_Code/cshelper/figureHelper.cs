@@ -12,7 +12,7 @@ public static class figureHelper
 {
 
 
-    public static Result GetInfoById(int userId)
+    public static Result GetInfoById(string userId)
     {
         DbHelperV2 dbhelperv2 = new DbHelperV2();
         var result = new Result<Figure>();
@@ -36,7 +36,7 @@ public static class figureHelper
         return result;
     }
 
-    public static Result AddFigure(int userId, string weight, string stature, string chestSize, string waistSize, string hiplineSize)
+    public static Result AddFigure(string userId, string weight, string stature, string chestSize, string waistSize, string hiplineSize)
     {
         var result = new Result();
         DbHelperV2 dbhelperv2 = new DbHelperV2();
