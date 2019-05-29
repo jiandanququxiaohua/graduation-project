@@ -209,6 +209,7 @@ const chothespress = {
                     obj.preview(function (index, file, result) {
                         console.log(file); //得到文件对象
                         _this.imgUrl = clothCommon.absImgUrl + file.name;
+                        $('#preview').attr('src', _this.imgUrl);
                     });
                 }
             });
