@@ -2,102 +2,87 @@
  * 我的穿搭
  */
 
-const WEARS = [
-  {
-    id: '1',
-    name: '搭配一',
-    describe: '描述',
-    clothes: [
-      {
-        id: '1',
-        name: 'sda',
-        size: '23',
-        price: '54',
-        imgUrl: ''
-      }
-    ]
-  },
-  {
-    id: '2',
-    name: '搭配二',
-    describe: '搭配二',
-    clothes: [
 
-    ]
-  }
-];
 
 const wear = {
-  init: function () {
-    this.on();
-    this.onModal();
-    this.ajaxData(1);
-    this.initAccordion();
-  },
-  on: function () {
-    // 添加按钮
-    $('#wear-add').on('click', function () {
-      $('#wearModal').modal('show');
-    });
+    init: function () {
+        this.getData();
+    },
+    on: function () {
 
-    $('.wear-edit-icon').on('click', function (e) {
-      e.stopPropagetion();
-      $('#wearModal').modal('show');
-    })
+    },
+    getData() {
+        var _this = this;
+        var name = $('#wear-name-input').val();
+        var user = clothCommon.getUser();
+        var params = {};
+        params.userId = user.id;
+        params.name = name;
+        params.type = 1;
 
-    $('.wear-delete-icon').on('click', function (e) {
-      e.stopPropagetion();
-      mear.ajaxData(3);
-    })
-  },
-  ajaxData: function (type) {
-    var method = type == '1' ? 'GET' : 'POST';
-    // $.ajax({
-    //   type: method,
-    //   url: '',
-    //   success: function () {
+        $.ajax({
+            type: 'POST',
+            url: 'aspx/wear.aspx',
+            data: params,
+            success: function (res) {
+                var data = res.Data || [];
+                _this.render(data);
+            }
+        })
+    },
+    getCloths: function (ids) {
+        $.ajax({
+            type: 'POST',
+            url: 'aspx/clothespress.aspx',
+            data: {
+                type: 5,
+                ids: ids
+            },
+            success: function (res) {
+                const data = res.Data || [];
+            }
+        })
+    },
+    render(data) {
+        var _this = this;
+        var wearBody = $('#wear-collapse');
+        var content = data.map((item, i) => {
+            return `
+              <div class="layui-colla-item">
+                <h2 class="layui-colla-title" data-ids="${item.clothIds}">${item.name}</h2>
+                <div class="layui-colla-content ${!i ? 'layui-show' : ''}">
+                    <div class="row">
+                        <div class="col-md-4">风格：${item.sName}</div>
+                        <div class="col-md-4">描述：${item.describe}</div>
+                        <div class="col-md-4 btns-margin">
+                            <button type="button" class="btn btn-primary wear-edit" data-id="${item.id}">编辑</button>
+                            <button type="button" class="btn wear-delete" data-id="${item.id}">删除</button>
+                        </div>
+                    </div>
+                    <ul class="wear-list-imgs"></ul>
+                </div>
+              </div>
+            `
+        }).join('');
 
-    //   }
-    // })
-  },
-  initAccordion: function () {
-    function clothrender (clothes) {
-      return clothes.map(function (item, i) {
-        return `
-          <li>
-            <img src="${item.imgUrl}" />
-            <dl>
-              <dt>${item.name}</dt>
-              <dd>${item.price}</dd>
-            </dl>
-          </li>
-        `;
-      })
+        wearBody.html(content);
+        _this.collapse();
+        if (data.length) {
+            _this.getCloths(data[0]['clothIds']);
+        }
+    },
+    collapse: function () {
+        var _this = this;
+        layui.use('element', function () {
+            var element = layui.element;
+
+            element.on('collapse(filter)', function (data) {
+                var head = data.title;
+                if (data.show) {
+                    var ids = $(head).data('ids');
+                    _this.getCloths(ids);
+                }
+            });
+        });
     }
-    var listHtml = WEARS.map(function (item, i) {
-      return `<h3 class="wear-list-title">${item.name}
-          <div class="icons-list right">
-            <i class="glyphicon glyphicon-pencil wear-edit-icon" title="编辑" data-id="${item.id}"></i>
-            <i class="glyphicon glyphicon-trash wear-delete-icon" title="删除" data-id="${item.id}"></i>
-          </div>
-        </h3>
-        <div class="wear-list-info">
-          <p>风格：${item.style}</p>
-          <p>描述：${item.describe}</p>
-          <ul class="clear-float">
-            ${clothrender(item.clothes)}
-          </ul>
-        </div>
-      `;
-    }).join('');
-    $('#wear-accordion').html(listHtml);
-    $('#wear-accordion').accordion({
-      collapsible: true
-    });
-  },
-  onModal: function () {
-    $('#wearModal').on('show.bs.modal', function (event) {
-      console.log('wear');
-    });
-  }
 }

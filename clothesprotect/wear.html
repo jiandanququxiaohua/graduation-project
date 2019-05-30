@@ -2,125 +2,117 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>衣橱管理</title>
-  <!-- css -->
-  <link rel="stylesheet" href="./static/js/bootstrap/css/bootstrap.min.css">
-  <link href="./static/js/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
-    <link href="./static/js/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/base.css">
-  <link rel="stylesheet" href="./css/common.css">
-  <link rel="stylesheet" href="./css/layout.css">
-  <!-- 当前页面样式 -->
-  <link rel="stylesheet" href="./css/wear.css">
-  <!-- 基本所需库JS -->
-  <script src="./static/js/jquery/jquery-3.3.1.js"></script>
-  <script src="./static/js/jquery-ui/jquery-ui.min.js"></script>
-  <script src="./static/js/bootstrap/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>衣橱管理</title>
+    <!-- css -->
+    <link rel="stylesheet" href="./static/js/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/js/layui-v2.4.5/css/layui.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <!-- 当前页面样式 -->
+    <link rel="stylesheet" href="./css/wear.css">
+    <!-- 基本所需库JS -->
+    <script src="./static/js/jquery/jquery-3.3.1.js"></script>
+    <script src="./static/js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./static/js/layui-v2.4.5/layui.js"></script>
 </head>
 <!-- 模板html: 包含一些基本样式及项目所需js -->
 
 <body>
-  <div id="app">
-    <div class="wrapper">
-      <header id="cloth-header" class="clear-float">
-        <div class="left cloth-header-logo">
-          <a href="./home.html"><span class="logo"></span></a>
-          <span>衣橱管理</span>
-        </div>
-        <div class="right cloth-header-user">
-          <span class="header-user"></span>&nbsp;|&nbsp;
-          <span class="logout">登出</span>
-        </div>
-      </header>
-      <div class="main">
-        <div id="navs">
-          <!-- 导航 -->
-        </div>
-        <div id="content">
-          <!-- 页面内容 -->
-          <div class="content-body">
-            <div class="wear">
-              <div class="wear-table">
-                <div class="wear-table-top clear-float">
-                  <div class="input-group left" style="width: 300px">
-                    <input type="text" class="form-control" placeholder="查询衣物搭配">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;查询
-                      </button>
-                    </span>
-                  </div>
-                  <div class="right"><button id="wear-add" type="button" class="btn btn-info">添加</button></div>
+    <div id="app">
+        <div class="wrapper">
+            <header id="cloth-header" class="clear-float">
+                <div class="left cloth-header-logo">
+                    <a href="./home.html"><span class="logo"></span></a>
+                    <span>衣橱管理</span>
                 </div>
-                <div class="wear-list" id="wear-accordion">
-                  <h3>搭配一</h3>
-                  <div>
-                    搭配一
-                  </div>
-                  <h3>搭配二</h3>
-                  <div>
-                    搭配二
-                  </div>
+                <div class="right cloth-header-user">
+                    <span class="header-user"></span>&nbsp;|&nbsp;
+                    <span class="logout">登出</span>
                 </div>
-              </div>
+            </header>
+            <div class="main">
+                <div id="navs">
+                    <!-- 导航 -->
+                </div>
+                <div id="content">
+                    <!-- 页面内容 -->
+                    <div class="content-body">
+                        <div class="wear">
+                            <div class="wear-table">
+                                <div class="wear-table-top clear-float">
+                                    <div class="input-group left" style="width: 300px">
+                                        <input type="text" id="wear-name-input" class="form-control" placeholder="查询衣物搭配">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button">
+                                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;查询
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="right"><button id="wear-add" type="button" class="btn btn-info">添加</button></div>
+                                </div>
+                                <div class="wear-list layui-collapse" id="wear-collapse" lay-accordion>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer id="footer">衣橱应用</footer>
+                </div>
             </div>
-          </div>
-          <footer id="footer">衣橱应用</footer>
         </div>
-      </div>
     </div>
-  </div>
-  <!-- Modal -->
-  <div class="modal fade" id="wearModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-              aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="modalTitle">穿搭配置</h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-inline">
-            <div class="form-item-box">
-              <div class="form-group">
-                  <label for="brand" class="title">品牌</label>
-                  <input type="text" class="form-control" id="brand" name="brand" placeholder="品牌">
-              </div>
-              <div class="form-group">
-                  <label for="name" class="title">名称</label>
-                  <input type="text" class="form-control" id="name" name="name" placeholder="名称">
-              </div>
+    <!-- Modal -->
+    <div class="modal fade" id="wearModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="modalTitle">穿搭配置</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline">
+                        <div class="form-item-box">
+                            <div class="form-group">
+                                <label for="brand" class="title">品牌</label>
+                                <input type="text" class="form-control" id="brand" name="brand" placeholder="品牌">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="title">名称</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="名称">
+                            </div>
+                        </div>
+                        <div class="form-item-box">
+                            <label for="describe">描述</label>
+                            <textarea class="form-control" style="width: 80%;" name="descript" id="descripe" rows="2"></textarea>
+                        </div>
+                    </form>
+                    <!-- 拖拽选中衣物进行搭配 -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary">确认</button>
+                </div>
             </div>
-            <div class="form-item-box">
-              <label for="describe">描述</label>
-              <textarea class="form-control" style="width: 80%;" name="descript" id="descripe" rows="2"></textarea>
-            </div>
-          </form>
-          <!-- 拖拽选中衣物进行搭配 -->
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-primary">确认</button>
-        </div>
-      </div>
     </div>
-  </div>
 </body>
 <!-- 项目基本JS -->
 <script src="./js/common.js"></script>
 <!-- 当前页所需JS -->
 <script src="./js/wear.js"></script>
 <script>
-  $().ready(function () {
-      clothCommon.init();
-      clothCommon.user();
-    clothCommon.navs('#navs', 'wear');
+    $().ready(function () {
+        clothCommon.init();
+        clothCommon.user();
+        clothCommon.navs('#navs', 'wear');
 
-    wear.init();
-  });
+        wear.init();
+    });
 </script>
 form-item-box
 </html>

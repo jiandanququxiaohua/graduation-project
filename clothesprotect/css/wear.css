@@ -1,20 +1,13 @@
-.title{
-  width: 50px;
-}
 
-.wear-list-title.ui-state-focus {
-
-}
-
-.wear-list-info li {
+.wear-list-imgs li {
   float: left;
-  margin: 8px;
+  margin: 16px;
 }
 
-.wear-list-info li > img {
-  width: 150px;
-  height: 150px;
-  cursor: pointer;
-  margin-bottom: 8px;
+.wear-list-imgs li > img {
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    margin-bottom: 8px;
 }
 

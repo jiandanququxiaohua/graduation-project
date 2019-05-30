@@ -9,6 +9,7 @@ const chothespress = {
         this.getClothType();
         this.initGetData();
         this.upload();
+        this.search();
     },
     initGetData: function () {
         var _this = this;
@@ -86,7 +87,10 @@ const chothespress = {
             $('#season-input').val(record.season);
             $('#size-input').val(record.size);
             $('#color-input').val(record.color);
+            $('#preview').attr('src', record.imgUrl);
             _this.editData = record || {};
+            _this.imgUrl = record.imgUrl;
+            //console.log(record.imgUrl);
         });
         $('.choth-espress-table').on('click', '.delete-row', function () {
             var id = $(this).data('id');
@@ -102,13 +106,13 @@ const chothespress = {
                     const resJson = typeof res == 'string' ? JSON.parse(res) : res;
                     if (resJson.Code + '' == '200') {
                         clothCommon.Message('success', '删除成功！');
-                        _this.search();
+                        _this.getData(_this.params);
                     }
                 }
             })
         });
         $('.modal-ok').on('click', function () {
-            var formData = $('#cloth-form-modal').serialize();
+            var formData = decodeURIComponent($('#cloth-form-modal').serialize(), true);
             var params = {};
             var user = clothCommon.getUser();
             formData.split('&').forEach(function (item) {
@@ -117,6 +121,7 @@ const chothespress = {
             });
             params.imgUrl = _this.imgUrl;
             params.userId = user.id;
+            params.createTime = new Date().toLocaleString();
 
             if (_this.editData) {
                 params.id = _this.editData.id;
@@ -134,7 +139,7 @@ const chothespress = {
                     if (resJson.Code + '' == '200') {
                         clothCommon.Message('success', '保存成功！');
                         $('#chothespressModal').modal('hide');
-                        _this.search();
+                        _this.getData(_this.params);
                     }
                 }
             })
@@ -142,6 +147,7 @@ const chothespress = {
         });
         $('.modal-cancel').on('click', function () {
             clothCommon.resetForm("cloth-form-modal");
+            _this.imgUrl = '';
         });
     },
     getClothType: function () {
@@ -160,6 +166,8 @@ const chothespress = {
 
             //监听提交
             form.on('submit(formDemo)', function (data) {
+                console.log(data.field);
+                _this.params = data.field;
                 _this.getData(data.field);
                 return false;
             });
@@ -234,7 +242,7 @@ const chothespress = {
                     { field: 'imgUrl', title: '图片', width: 100, templet: '#cloth-img' },
                     { field: 'id', title: 'ID', width: 80, sort: true },
                     { field: 'clothName', title: '衣物名称' },
-                    { field: 'clothTypeName', title: '衣物类别', sort: true },
+                    { field: 'type', title: '衣物类别', sort: true },
                     { field: 'price', title: '价格', },
                     { field: 'brand', title: '品牌' },
                     { field: 'fabric', title: '衣料' },

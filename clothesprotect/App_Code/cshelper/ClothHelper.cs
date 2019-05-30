@@ -40,7 +40,7 @@ public static class ClothHelper
         if (dt == null || dt.Rows.Count == 0)
         {
             //Error todo  
-            result.Code = 403;
+            result.Code = 200;
             result.Message = "查无此人！";
             result.IsTrue = false;
             result.Data = new List<Cloth>();
@@ -73,7 +73,7 @@ public static class ClothHelper
         var result = new Result();
         DbHelperV2 dbhelperv2 = new DbHelperV2();
         //此处需优化，参数化处理
-        var sqltextFomat = "update [clothes].[dbo].[cloth]  set  userId='{0}',clothTypeId='{1}',clothName='{2}',price='{3}',brand='{4}',fabric='{5}',season='{6}',size='{7}',color='{8}',imgUrl='{9}',createTime='{10}',endTime='{11}') where id={12}  ";
+        var sqltextFomat = "update [clothes].[dbo].[cloth]  set  userId='{0}',clothTypeId='{1}',clothName='{2}',price='{3}',brand='{4}',fabric='{5}',season='{6}',size='{7}',color='{8}',imgUrl='{9}',createTime='{10}',endTime='{11}' where id={12}  ";
         var sqlText = string.Format(sqltextFomat, model.userId, model.clothTypeId, model.clothName, model.price, model.brand, model.fabric, model.season, model.size, model.color, model.imgUrl, model.createTime, model.endTime, id);
         dbhelperv2.ExecuteNonQuery(new List<string> { sqlText });
         result.Code = 200;
@@ -97,7 +97,21 @@ public static class ClothHelper
         return result;
     }
 
+    public static Result getClothByIds(string ids)
+    {
+        var result = new Result<List<Cloth>>();
+        //此处需优化，参数化处理
+        var sqltextFomat = "SELECT a.*, b.type from [clothes].[dbo].[cloth] as a, [clothes].[dbo].[clothType] as b where a.id in ({0}) and a.clothTypeId = b.id";
+        DbHelperV2 dbhelperv2 = new DbHelperV2();
+        var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, ids));
+        var dts = dt.ToCloths();
 
+        result.Code = 200;
+        result.Message = "成功！";
+        result.Data = dts;
+        result.IsTrue = true;
+        return result;
+    }
 
 
 }

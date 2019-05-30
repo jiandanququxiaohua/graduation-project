@@ -6,7 +6,7 @@
         $('.register-submit-btn').on('click', this.register);
     },
     register: function () {
-        var formData = $('.register-form').eq(0).serialize();
+        var formData = decodeURIComponent($('.register-form').eq(0).serialize());
         var submitBtn = $('.register-submit-btn');
         submitBtn.button('loading');
 

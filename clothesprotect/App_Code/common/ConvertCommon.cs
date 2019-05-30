@@ -122,6 +122,7 @@ public static class ConvertCommon
             model.createTime = reurnSafeStr(row["createTime"]);
             model.endTime = reurnSafeStr(row["endTime"]);
             model.sName = reurnSafeStr(row["sName"]);
+            model.name = reurnSafeStr(row["name"]);
             model.styledescribe = reurnSafeStr(row["styledescribe"]);
             model.id = Convert.ToInt32(row["id"]);
             result.Add(model);

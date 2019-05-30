@@ -9,12 +9,12 @@ public static class ChuanDaHelper
 {
 
 
-    public static Result GetInfoByTypeOrName(int styeid, string name, int userId)
+    public static Result GetInfoByTypeOrName(string styeid, string name, string userId)
     {
         DbHelperV2 dbhelperv2 = new DbHelperV2();
         var result = new Result<List<Chuanda>>();
         var whereexp = " userId=" + userId;
-        if (styeid != -1)
+        if (!string.IsNullOrEmpty(styeid))
         {
             whereexp = whereexp + " and styleId=" + styeid;
         }
@@ -24,7 +24,7 @@ public static class ChuanDaHelper
         }
 
         //此处需优化，参数化处理
-        var sel = @"SELECT TOP 1000 cd.[id]
+        var sqltextFomat = @"SELECT TOP 1000 cd.[id]
                                 ,[styleId]
                                 ,[clothIds]
                                 ,cd.[describe]
@@ -34,8 +34,7 @@ public static class ChuanDaHelper
                                 ,cd.[name]
 	                            ,sl.sName
 	                            ,sl.describe as styledescribe
-                    FROM [clothes].[dbo].[chuanda] cd inner join [clothes].[dbo].[style] sl on cd.styleId= sl.id";
-        var sqltextFomat = "select * from [clothes].[dbo].[chuanda] where {0}";
+                    FROM [clothes].[dbo].[chuanda] cd inner join [clothes].[dbo].[style] sl  on {0} and cd.styleId= sl.id";
         var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, whereexp));
         if (dt == null || dt.Rows.Count == 0)
         {

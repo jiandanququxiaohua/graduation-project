@@ -10,7 +10,7 @@ public partial class clothespress : System.Web.UI.Page
 {
 
     //type=1  get; type=2 add;type=3 edit;type=4 delete
-    int[] _types = new int[] { 1, 2, 3, 4 };
+    int[] _types = new int[] { 1, 2, 3, 4, 5 };
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -56,6 +56,7 @@ public partial class clothespress : System.Web.UI.Page
                 model.clothName = Request.Params.Get("clothName") ?? "";
                 model.clothTypeId = Request.Params.Get("clothTypeId") ?? "";
                 model.color = Request.Params.Get("color") ?? "";
+                model.size = Request.Params.Get("size") ?? "";
                 model.createTime = Request.Params.Get("createTime") ?? "";
                 model.endTime = Request.Params.Get("endTime") ?? "";
                 model.fabric = Request.Params.Get("fabric") ?? "";
@@ -93,6 +94,14 @@ public partial class clothespress : System.Web.UI.Page
                 var id = Request.Params.Get("id") ?? "";
                 var intid = Convert.ToInt32(id);
                 Response.Write(JsonConvert.SerializeObject(ClothHelper.DeleteClothById(intid)));
+                return;
+            }
+
+            if (inttype == 5)
+            {
+                //类型主键id
+                var ids = Request.Params.Get("ids") ?? "";
+                Response.Write(JsonConvert.SerializeObject(ClothHelper.getClothByIds(ids)));
                 return;
             }
         }

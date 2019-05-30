@@ -38,7 +38,7 @@
     save: function () {
         var user = clothCommon.getUser();
         var initData = closeFigure.data;
-        var formData = $('#figure-form').serialize();
+        var formData = decodeURIComponent($('#figure-form').serialize(), true);
         var submitBtn = $('.figure-submit');
         var params = {};
         formData.split('&').forEach(function (item) {

@@ -36,7 +36,7 @@
         })
     },
     save: function () {
-        var formData = $('#user-form').serialize();
+        var formData = decodeURIComponent($('#user-form').serialize());
         var submitBtn = $('.submit-btn');
         var params = {};
         var user = clothCommon.getUser();
