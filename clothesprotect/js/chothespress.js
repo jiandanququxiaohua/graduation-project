@@ -202,7 +202,6 @@ const chothespress = {
     },
     onModal: function () {
         $('#chothespressModal').on('show.bs.modal', function (event) {
-            $('.layui-upload-file').attr('webkitRelativePath', true);
         });
     },
     upload: function () {

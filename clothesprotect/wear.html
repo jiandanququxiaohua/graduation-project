@@ -8,7 +8,7 @@
     <title>衣橱管理</title>
     <!-- css -->
     <link rel="stylesheet" href="./static/js/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./static/js/layui-v2.4.5/css/layui.css">
+    <link rel="stylesheet" href="./static/js/layui-v2.5.0/css/layui.css">
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/layout.css">
@@ -17,7 +17,7 @@
     <!-- 基本所需库JS -->
     <script src="./static/js/jquery/jquery-3.3.1.js"></script>
     <script src="./static/js/bootstrap/js/bootstrap.min.js"></script>
-    <script src="./static/js/layui-v2.4.5/layui.js"></script>
+    <script src="./static/js/layui-v2.5.0/layui.all.js"></script>
 </head>
 <!-- 模板html: 包含一些基本样式及项目所需js -->
 
@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="right"><button id="wear-add" type="button" class="btn btn-info">添加</button></div>
                                 </div>
-                                <div class="wear-list layui-collapse" id="wear-collapse" lay-accordion>
+                                <div class="wear-list layui-collapse" id="wear-collapse" lay-accordion lay-filter="wear-list">
                                 </div>
                             </div>
                         </div>
@@ -75,27 +75,31 @@
                     <h4 class="modal-title" id="modalTitle">穿搭配置</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-inline">
-                        <div class="form-item-box">
-                            <div class="form-group">
-                                <label for="brand" class="title">品牌</label>
-                                <input type="text" class="form-control" id="brand" name="brand" placeholder="品牌">
-                            </div>
-                            <div class="form-group">
-                                <label for="name" class="title">名称</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="名称">
+                    <form class="layui-form" id="wear-form-modal">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">搭配名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="name" required lay-verify="required" placeholder="请输入搭配名称" autocomplete="off" class="layui-input" id="name-input">
                             </div>
                         </div>
-                        <div class="form-item-box">
-                            <label for="describe">描述</label>
-                            <textarea class="form-control" style="width: 80%;" name="descript" id="descripe" rows="2"></textarea>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">风格类别</label>
+                            <div class="layui-input-block">
+                                <select name="styleId" class="style-select" id="style-select" required lay-verify="required"></select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">描述</label>
+                            <div class="layui-input-block">
+                                <textarea rows="3" name="describe" required lay-verify="required" placeholder="请输入搭配描述" class="layui-textarea" id="describe-textarea"></textarea>
+                            </div>
                         </div>
                     </form>
-                    <!-- 拖拽选中衣物进行搭配 -->
+                    <div id="transfer-box"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary">确认</button>
+                    <button type="button" class="btn btn-primary modal-ok">确认</button>
+                    <button type="button" class="btn btn-default modal-cancel" data-dismiss="modal">取消</button>
                 </div>
             </div>
         </div>
@@ -114,5 +118,4 @@
         wear.init();
     });
 </script>
-form-item-box
 </html>

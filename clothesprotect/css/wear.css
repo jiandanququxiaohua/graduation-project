@@ -1,4 +1,6 @@
-
+.wear-list {
+    margin: 16px 0;
+}
 .wear-list-imgs li {
   float: left;
   margin: 16px;

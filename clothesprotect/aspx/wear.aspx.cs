@@ -39,14 +39,11 @@ public partial class wear : System.Web.UI.Page
                 return;
             }
             //编辑
-            if (inttype == 2)
+            if (inttype == 3)
             {
 
                 //类型主键id
                 var id = Request.Params.Get("id") ?? "";
-
-                var intid = Convert.ToInt32(id);
-
                 var userId = Request.Params.Get("userId") ?? "";
                 var name = Request.Params.Get("name") ?? "";
                 var styleId = Request.Params.Get("styleId") ?? "";
@@ -55,11 +52,11 @@ public partial class wear : System.Web.UI.Page
                 var createTime = Request.Params.Get("createTime") ?? "";
                 var endTime = Request.Params.Get("endTime") ?? "";
 
-                Response.Write(JsonConvert.SerializeObject(ChuanDaHelper.EditChuanDa(name,styleId,clothIds,describe,createTime,endTime, intid)));
+                Response.Write(JsonConvert.SerializeObject(ChuanDaHelper.EditChuanDa(id, userId, name, styleId, clothIds, describe, createTime, endTime)));
                 return;
             }
             //新增
-            if (inttype == 3)
+            if (inttype == 2)
             {
                 var userId = Request.Params.Get("userId") ?? "";
                 var name = Request.Params.Get("name") ?? "";
@@ -69,7 +66,7 @@ public partial class wear : System.Web.UI.Page
                 var createTime = Request.Params.Get("createTime") ?? "";
                 var endTime = Request.Params.Get("endTime") ?? "";
 
-                Response.Write(JsonConvert.SerializeObject(ChuanDaHelper.AddChuanDa(name, styleId, clothIds, describe, createTime, endTime)));
+                Response.Write(JsonConvert.SerializeObject(ChuanDaHelper.AddChuanDa(userId, name, styleId, clothIds, describe, createTime, endTime)));
                 return;
             }
             //删除

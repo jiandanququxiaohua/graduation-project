@@ -54,13 +54,13 @@ public static class ChuanDaHelper
         return new Result<List<Chuanda>> { Code = 200, IsTrue = true, Message = "成功", Data = dts };
     }
 
-    public static Result AddChuanDa(string name, string styleId, string clothIds, string describe, string createTime, string endTime)
+    public static Result AddChuanDa(string userId, string name, string styleId, string clothIds, string describe, string createTime, string endTime)
     {
         var result = new Result();
         DbHelperV2 dbhelperv2 = new DbHelperV2();
         //此处需优化，参数化处理
-        var sqltextFomat = "insert into [clothes].[dbo].[chuanda] (name,styleId,clothIds,describe,createTime,endTime) values ('{0}','{1}','{2}','{3}','{4}','{5}') ";
-        var sqlText = string.Format(sqltextFomat, name, styleId, clothIds, describe, createTime, endTime);
+        var sqltextFomat = "insert into [clothes].[dbo].[chuanda] (userId,name,styleId,clothIds,describe,createTime,endTime) values ('{0}','{1}','{2}','{3}','{4}','{5}', '{6}') ";
+        var sqlText = string.Format(sqltextFomat, userId, name, styleId, clothIds, describe, createTime, endTime);
         dbhelperv2.ExecuteNonQuery(new List<string> { sqlText });
         result.Code = 200;
         result.Message = "成功！";
@@ -68,13 +68,14 @@ public static class ChuanDaHelper
         return result;
     }
 
-    public static Result EditChuanDa(string name, string styleId, string clothIds, string describe, string createTime, string endTime, int id)
+    public static Result EditChuanDa(string id, string userId, string name, string styleId, string clothIds, string describe, string createTime, string endTime)
     {
+        var intid = Convert.ToInt32(id);
         var result = new Result();
         DbHelperV2 dbhelperv2 = new DbHelperV2();
         //此处需优化，参数化处理
-        var sqltextFomat = "update [clothes].[dbo].[chuanda]  set  name='{0}',styleId='{1}',clothIds='{2}',describe='{3}',createTime='{4}',endTime='{5'}) where id={6}  ";
-        var sqlText = string.Format(sqltextFomat, name, styleId, clothIds, describe, createTime, endTime, id);
+        var sqltextFomat = "update [clothes].[dbo].[chuanda] set name='{0}',styleId='{1}',clothIds='{2}',describe='{3}',createTime='{4}',endTime='{5}', userId='{6}' where id={7}  ";
+        var sqlText = string.Format(sqltextFomat, name, styleId, clothIds, describe, createTime, endTime, userId, intid);
         dbhelperv2.ExecuteNonQuery(new List<string> { sqlText });
         result.Code = 200;
         result.Message = "成功！";

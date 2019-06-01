@@ -15,7 +15,7 @@ public partial class aspx_style : System.Web.UI.Page
     {
 
         //type=1  get; type=2 add;type=3 edit;type=4 delete
-        var type = Request.QueryString.Get("type") ?? "";
+        var type = Request.Params.Get("type") ?? "";
         var inttype = 0;
         int.TryParse(type, out inttype);
         if (!_types.Contains(inttype))
