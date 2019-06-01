@@ -30,7 +30,7 @@ public static class ClothHelper
         }
         if (!string.IsNullOrEmpty(name))
         {
-            whereexp = whereexp + " and clothName=" + name;
+            whereexp = whereexp + " and clothName LIKE '%" + name + "%'";
         }
 
         //此处需优化，参数化处理

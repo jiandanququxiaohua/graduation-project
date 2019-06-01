@@ -59,7 +59,7 @@
 <script src="./js/home.js"></script>
 <script>
   $().ready(function () {
-    clothCommon.init();
+      clothCommon.init();
 
     home.init();
   });

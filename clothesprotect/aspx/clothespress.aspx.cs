@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 public partial class clothespress : System.Web.UI.Page
 {
 
-    //type=1  get; type=2 add;type=3 edit;type=4 delete
+    //type=1 get; type=2 add;type=3 edit;type=4 delete
     int[] _types = new int[] { 1, 2, 3, 4, 5 };
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -77,6 +77,7 @@ public partial class clothespress : System.Web.UI.Page
                 model.clothName = Request.Params.Get("clothName") ?? "";
                 model.clothTypeId = Request.Params.Get("clothTypeId") ?? "";
                 model.color = Request.Params.Get("color") ?? "";
+                model.size = Request.Params.Get("size") ?? "";
                 model.createTime = Request.Params.Get("createTime") ?? "";
                 model.endTime = Request.Params.Get("endTime") ?? "";
                 model.fabric = Request.Params.Get("fabric") ?? "";

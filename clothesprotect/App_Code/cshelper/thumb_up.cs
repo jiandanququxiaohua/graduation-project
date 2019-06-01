@@ -20,15 +20,7 @@ public class thumb_up
         //此处需优化，参数化处理
         var sqltextFomat = "select * from [clothes].[dbo].[link] where userId='{0}'";
         var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, userId));
-        if (dt == null || dt.Rows.Count == 0)
-        {
-            //Error todo  
-            result.Code = 403;
-            result.Message = "无点赞记录!";
-            result.IsTrue = false;
-            result.Data = new List<Link>();
-            return result;
-        }
+        
         var links = dt.ToLinks();
         result.Code = 200;
         result.Message = "成功！";

@@ -6,6 +6,7 @@ using System.Data;
 
 /// <summary>
 /// ConvertCommon 的摘要说明
+/// 接口返回数据结构，所有的接口
 /// </summary>
 public static class ConvertCommon
 {

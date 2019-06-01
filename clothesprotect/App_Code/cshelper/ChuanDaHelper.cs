@@ -20,7 +20,7 @@ public static class ChuanDaHelper
         }
         if (!string.IsNullOrEmpty(name))
         {
-            whereexp = whereexp + " and name=" + name;
+            whereexp = whereexp + " and name LIKE '%" + name + "%'";
         }
 
         //此处需优化，参数化处理
@@ -36,15 +36,7 @@ public static class ChuanDaHelper
 	                            ,sl.describe as styledescribe
                     FROM [clothes].[dbo].[chuanda] cd inner join [clothes].[dbo].[style] sl  on {0} and cd.styleId= sl.id";
         var dt = dbhelperv2.ExecuteDataTable(string.Format(sqltextFomat, whereexp));
-        if (dt == null || dt.Rows.Count == 0)
-        {
-            //Error todo  
-            result.Code = 403;
-            result.Message = "查无此人！";
-            result.IsTrue = false;
-            result.Data = new List<Chuanda>();
-            return result;
-        }
+        
         var dts = dt.ToChuanDa();
         //result.Code = 200;
         //result.Message = "成功！";

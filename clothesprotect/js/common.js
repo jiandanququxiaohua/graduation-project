@@ -77,6 +77,7 @@ function getQueryString(name) {
     }
     return null;
 }
+const noUser = ['/login.html', '/register.html', '/Default.aspx', '/'] 
 
 const clothCommon = {
     absImgUrl: '/image/img-clothes/',
@@ -84,10 +85,13 @@ const clothCommon = {
         var user = this.getUser();
         var path = window.location.pathname;
         //console.log(path, user);
-        if (!user && (path != '/' && path != '/Default.aspx')) {
+        if (!user && (path != '/' && path != '/Default.aspx' && (path.indexOf('/chothDetail.html') < 0))) {
             this.logout();
         }
-        $('.logout').eq(0).on('click', function () {
+        if (noUser.indexOf(path) > -1) {
+            this.destory();
+        }
+        $('.logout').on('click', function () {
             clothCommon.logout();
         })
     },
@@ -136,6 +140,7 @@ const clothCommon = {
     user: function () {
         var user = this.getUser();
         $('.header-user').html(user ? user.userName : '');
+        $('.logout').html(user ? '登出' : '登录');
     },
     getClothType: function (fn) {
         $.ajax({

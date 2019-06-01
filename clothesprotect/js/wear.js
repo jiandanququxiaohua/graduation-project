@@ -30,10 +30,12 @@ const wear = {
     },
     on: function () {
         var _this = this;
+        // 点击图片查看详情
         $('.wear-list-imgs').on('click', '.cloth-img', function () {
             var id = $(this).data('id');
             window.location.href = '/chothDetail.html?id=' + id;
         })
+        // 编辑
         $('#wear-collapse').on('click', '.wear-edit', function () {
             var id = $(this).data('id');
             var record = _this.wearData.find(item => item.id + '' == id);
@@ -49,19 +51,28 @@ const wear = {
             _this.editData = record || {};
             
         })
+        // 查询
+        $('.search-btn').on('click', function () {
+            _this.getData();
+        }),
+        // 删除
         $('#wear-collapse').on('click', '.wear-delete', function () {
             var id = $(this).data('id');
             _this.delete(id);
         })
+        // 新增
         $('#wear-add').on('click', function () {
             var id = $(this).data('id');
             $('#wearModal').modal('show');
             clothCommon.resetForm("wear-form-modal");
             _this.getAllCloths('');
+            _this.editData = null;
         })
+        // 取消
         $('.modal-cancel').on('click', function () {
             clothCommon.resetForm("wear-form-modal");
         });
+        // 弹框 确认
         $('.modal-ok').on('click', function () {
             var formData = decodeURIComponent($('#wear-form-modal').serialize(), true);
             var params = {};
